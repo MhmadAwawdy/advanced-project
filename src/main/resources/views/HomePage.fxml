@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.HomeController">
+    <top>
+        <HBox spacing="10" alignment="CENTER" style="-fx-background-color: #DCA942; -fx-padding: 10;">
+            <Button text="☰" fx:id="menuButton" style="-fx-font-size: 16px; -fx-text-fill: black; -fx-background-radius: 5px;" onAction="#toggleMenu" />
+            <Label text="Library Reservation System" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: black;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="loginButton" text="Login" style="-fx-background-color: #FBF3DB; -fx-background-radius: 5px;" />
+        </HBox>
+
+
+    </top>
+
+    <left>
+        <VBox fx:id="menu" spacing="10" style="-fx-background-color: #FBF3DB; -fx-padding: 10;" visible="true">
+            <Button text="Add Book" fx:id="addBookButton" style="-fx-background-color: #DCA942; -fx-text-fill: black;" onAction="#navigateToAddBook"/>
+            <Button text="Remove Book" fx:id="removeBookButton" style="-fx-background-color: #DCA942; -fx-text-fill: black;" onAction="#navigateToRemoveBook"/>
+            <Button text="Reservations" fx:id="reservationButton" style="-fx-background-color: #DCA942; -fx-text-fill: black;" onAction="#navigateToReservation"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 20;">
+
+            <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding: 10; -fx-background-color: #FBF3DB;">
+                <TextField promptText="Search..." fx:id="searchField" style="-fx-font-size: 14px; -fx-background-radius: 5px; -fx-padding: 5px;" HBox.hgrow="ALWAYS" />
+                <Button text="Number of Books" fx:id="numBooksButton" style="-fx-background-color: #FBF3DB; -fx-text-fill: black;" />
+                <Button text="Number of Students" fx:id="numStudentsButton" style="-fx-background-color: #FBF3DB; -fx-text-fill: black;" />
+                <Button text="Latest Reservations" fx:id="latestReservationsButton" style="-fx-background-color: #FBF3DB; -fx-text-fill: black;" />
+            </HBox>
+
+            <GridPane fx:id="booksGrid" hgap="20" vgap="20" style="-fx-padding: 20;" alignment="CENTER">
+                <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <ImageView fx:id="book1Image" fitWidth="200" fitHeight="300" />
+                    <Label text="Book 1" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <ImageView fx:id="book2Image" fitWidth="200" fitHeight="300" />
+                    <Label text="Book 2" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <ImageView fx:id="book3Image" fitWidth="200" fitHeight="300" />
+                    <Label text="Book 3" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                </VBox>
+
+                <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                    <ImageView fx:id="book4Image" fitWidth="200" fitHeight="300" />
+                    <Label text="Book 4" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="0">
+                    <ImageView fx:id="book5Image" fitWidth="200" fitHeight="300" />
+                    <Label text="Book 5" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="0">
+                    <ImageView fx:id="book6Image" fitWidth="200" fitHeight="300" />
+                    <Label text="Book 6" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                </VBox>
+
+            </GridPane>
+        </VBox>
+    </center>
+</BorderPane>

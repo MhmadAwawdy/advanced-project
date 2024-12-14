@@ -11,6 +11,9 @@ module org.openjfx.librarysystem {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens org.openjfx.librarysystem to javafx.fxml;
-    exports org.openjfx.librarysystem;
+    opens controllers to javafx.fxml;
+    opens org.openjfx.librarysystem.app to javafx.fxml;
+    opens views to javafx.fxml;
+    exports org.openjfx.librarysystem.app;
+    exports controllers;
 }
