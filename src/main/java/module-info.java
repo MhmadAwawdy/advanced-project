@@ -1,4 +1,4 @@
-module org.openjfx.librarysystem {
+module com.example.libraryfinalproject {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -11,6 +11,6 @@ module org.openjfx.librarysystem {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens org.openjfx.librarysystem to javafx.fxml;
-    exports org.openjfx.librarysystem;
+    opens com.example.libraryfinalproject to javafx.fxml;
+    exports com.example.libraryfinalproject;
 }
