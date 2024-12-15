@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.ReservationController">
+    <top>
+        <Label text="Reserve a Book" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-padding: 10;"/>
+    </top>
+    <center>
+        <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+            <TextField fx:id="bookTitleField" promptText="Book Title"/>
+            <TextField fx:id="userField" promptText="Your Name"/>
+            <Button text="Reserve Book" fx:id="reserveButton" onAction="#handleReservation" style="-fx-background-color: #DCA942; -fx-text-fill: black;"/>
+        </VBox>
+    </center>
+</BorderPane>
