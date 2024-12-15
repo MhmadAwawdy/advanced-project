@@ -1,13 +1,16 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class HomeController {
 
@@ -20,14 +23,10 @@ public class HomeController {
     @FXML
     private Button reservationButton;
 
-    @FXML
-    private VBox menu;
 
     @FXML
     private TextField searchField;
 
-    @FXML
-    private GridPane booksGrid;
 
     @FXML
     private ImageView book1Image;
@@ -46,16 +45,55 @@ public class HomeController {
     @FXML
     private ImageView book6Image;
 
-    @FXML
-    private BorderPane rootPane;
-    @FXML
-    private Button menuButton;
-    @FXML
+
     private Button loginButton;
+
+
+    @FXML
+    private ImageView logoImage;
+    @FXML
+    private ImageView profileImage;
+
     @FXML
     public void initialize() {
-
         loadBookImages();
+        loadLogo();  InputStream imageStream = getClass().getResourceAsStream("/images/UserIcon.png");
+        if (imageStream != null) {
+            Image image = new Image(imageStream);
+            profileImage.setImage(image);
+        } else {
+            System.out.println("Error: UserIcon.png not found in /images folder.");
+        }
+        Image image = new Image(getClass().getResourceAsStream("/images/UserIcon.png"));
+
+
+        profileImage.setImage(image);
+
+    }
+
+
+
+    private void loadLogo() {
+        try {
+            logoImage.setImage(new Image(getClass().getResource("/images/logo.PNG").toExternalForm()));
+        } catch (NullPointerException e) {
+            System.out.println("Error: Logo image not found.");
+        }
+    }
+
+    @FXML
+    private void openProfile() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ProfilePage.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Librarian Profile");
+            stage.setScene(new Scene(root, 1000, 750));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -74,12 +112,7 @@ public class HomeController {
         }
     }
 
-    @FXML
-    public void toggleMenu() {
-        boolean isVisible = menu.isVisible();
-        menu.setVisible(!isVisible);
-        menu.setManaged(!isVisible);
-    }
+
 
     @FXML
     public void navigateToAddBook() {

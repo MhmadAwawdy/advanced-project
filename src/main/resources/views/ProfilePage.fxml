@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<VBox spacing="20" alignment="CENTER" style="-fx-background-color: #DCDCDC; -fx-padding: 40;"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.ProfileController">
+
+    <Label text="Librarian Profile"
+           style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <Region HBox.hgrow="ALWAYS" />
+
+    <ImageView fx:id="profileImage" fitWidth="100" fitHeight="100"  />
+    <Label text="Name: Ahmad Ali" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+    <Label text="ID: 12345" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+    <Label text="Email: ahmad.ali@example.com" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+    <Button text="Log Out" style="-fx-background-color: #FBF3DB; -fx-background-radius: 5px;-fx-font-weight: bold;" />
+</VBox>
