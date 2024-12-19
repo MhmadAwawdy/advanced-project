@@ -10,61 +10,67 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="606.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="606.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.advanceproject.AddBookController">
    <children>
 
-      <!-- Title Label -->
       <Label alignment="CENTER_LEFT" text="Add New Book" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
 
-      <!-- Icon Image -->
+
       <ImageView fitHeight="130.0" fitWidth="130.0" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="2.0">
          <image>
             <Image url="@../../../images/addBook.png" />
          </image>
       </ImageView>
 
-      <!-- Separator -->
+
       <Separator AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0" />
 
-      <!-- Book Image on the left, aligned with text fields -->
+
       <ImageView fitHeight="270.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="170.0">
          <image>
             <Image url="@../../../images/bookImage.jpeg" />
          </image>
       </ImageView>
 
-      <!-- Upload Link under the Book Image -->
+
       <Hyperlink alignment="CENTER" text="Upload Book Image" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="470.0">
          <style>
             -fx-text-fill: #DCA942; -fx-font-size: 14; -fx-underline: true;
          </style>
       </Hyperlink>
 
-      <!-- Text Fields aligned with the Book Image -->
-      <TextField prefHeight="40.0" promptText="Book Title" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="160.0" />
-      <TextField prefHeight="40.0" promptText="Author Name" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="220.0" />
-      <TextField prefHeight="40.0" promptText="Book Type" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="280.0" />
-      <TextField prefHeight="40.0" promptText="yyyy-MM-dd" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="340.0" />
-      <TextField prefHeight="40.0" promptText="Booking Status" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="400.0" />
+      <!-- Book Fields -->
+      <TextField fx:id="titleField" prefHeight="40.0" promptText="Book Title" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="160.0" />
+      <TextField fx:id="authorField" prefHeight="40.0" promptText="Author Name" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="220.0" />
+      <TextField fx:id="typeField" prefHeight="40.0" promptText="Book Type" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="280.0" />
+      <TextField fx:id="dateField" prefHeight="40.0" promptText="Publish year" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="340.0" />
+      <TextField fx:id="statusField" prefHeight="40.0" promptText="Booking Status" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="400.0" />
 
-      <!-- Cancel and Add Buttons -->
+      <!-- Error Messages for Fields -->
+      <Text fx:id="titleErrorText" style="-fx-fill: red;" visible="false" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="200.0" />
+      <Text fx:id="authorErrorText" style="-fx-fill: red;" visible="false" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="260.0" />
+      <Text fx:id="typeErrorText" style="-fx-fill: red;" visible="false" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="320.0" />
+      <Text fx:id="dateErrorText" style="-fx-fill: red;" visible="false" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="380.0" />
+      <Text fx:id="statusErrorText" style="-fx-fill: red;" visible="false" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="440.0" />
+
+
       <HBox alignment="CENTER" spacing="40.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
-         <Button prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #DCA942; -fx-text-fill: white; -fx-background-radius: 20;" text="Cancel">
+         <Button fx:id="cancelButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #DCA942; -fx-text-fill: white; -fx-background-radius: 20;" text="Cancel">
             <font>
                <Font name="System Bold" size="20.0" />
             </font>
          </Button>
-         <Button prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #DCA942; -fx-text-fill: white; -fx-background-radius: 20;" text="Add">
+         <Button fx:id="addButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #DCA942; -fx-text-fill: white; -fx-background-radius: 20;" text="Add">
             <font>
                <Font name="System Bold" size="20.0" />
             </font>
          </Button>
       </HBox>
-
    </children>
 </AnchorPane>
