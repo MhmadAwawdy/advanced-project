@@ -1,4 +1,4 @@
-package com.example.libraryfinalproject;
+package Controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,7 +13,7 @@ public class BookDetailsController {
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/View/HomePage.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -25,4 +25,10 @@ public class BookDetailsController {
             e.printStackTrace();
         }
     }
+
+
+
+
+
+
 }

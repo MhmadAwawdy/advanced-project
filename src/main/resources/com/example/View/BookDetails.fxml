@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:controller="com.example.libraryfinalproject.BookDetailsController" prefHeight="660.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="660.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BookDetailsController">
    <children>
       <AnchorPane layoutX="-2.0" prefHeight="704.0" prefWidth="589.0">
          <children>
@@ -25,22 +26,22 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="8.0" layoutY="301.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="8.0" layoutY="373.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="8.0" layoutY="455.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
-            <Label layoutX="20.0" layoutY="151.0" text="اسم الكتاب:رسائل من القران">
+            <Label layoutX="174.0" layoutY="153.0" text="اسم الكتاب: ">
                <font>
                   <Font name="Apple SD Gothic Neo Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="27.0" layoutY="228.0" text="اسم المؤلف:أدهم الشرقاوي">
+            <Label layoutX="175.0" layoutY="228.0" text="اسم المؤلف: ">
                <font>
                   <Font name="Apple SD Gothic Neo Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="53.0" layoutY="309.0" text="نوع الكتاب:الفئة الدينية">
+            <Label layoutX="172.0" layoutY="306.0" text="نوع الكتاب: ">
                <font>
                   <Font name="Apple SD Gothic Neo Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="110.0" layoutY="377.0" text=" تاريخ النشر:2022">
+            <Label layoutX="170.0" layoutY="381.0" text="تاريخ النشر:">
                <font>
                   <Font name="Apple SD Gothic Neo Bold" size="25.0" />
                </font>
@@ -60,12 +61,12 @@
                   <Font name="Apple SD Gothic Neo Regular" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="98.0" layoutY="463.0" text="حالة الحجز:محجوز">
+            <Label layoutX="171.0" layoutY="463.0" text="حالة الحجز: ">
                <font>
                   <Font name="Apple SD Gothic Neo Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="98.0" layoutY="532.0" text="اللغاء الحجز">
+            <Label layoutX="98.0" layoutY="532.0" text="إلغاء الحجز">
                <font>
                   <Font name="Apple SD Gothic Neo Bold" size="25.0" />
                </font>
@@ -85,17 +86,14 @@
             <ImageView fitHeight="65.0" fitWidth="48.0" layoutX="403.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Photos/details.png" />
-               </image></ImageView>
-            <ImageView fitHeight="398.0" fitWidth="248.0" layoutX="327.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../Photos/Quran.png" />
                </image>
             </ImageView>
-            <Button layoutX="487.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: #dca942;" text="Back" onAction="#handleBackButtonAction">
+            <Button layoutX="487.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: #dca942;" text="Back">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
+            <ImageView fitHeight="346.0" fitWidth="245.0" layoutX="327.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

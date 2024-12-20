@@ -11,6 +11,8 @@ module com.example.libraryfinalproject {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens com.example.libraryfinalproject to javafx.fxml;
-    exports com.example.libraryfinalproject;
+    opens JavaMain to javafx.fxml;
+    exports JavaMain;
+    exports Controllers;
+    opens Controllers to javafx.fxml;
 }

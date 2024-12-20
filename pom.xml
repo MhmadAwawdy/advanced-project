@@ -15,6 +15,10 @@
     </properties>
 
     <dependencies>
+
+
+
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -134,7 +138,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.libraryfinalproject/com.example.libraryfinalproject.HelloApplication
+                                com.example.libraryfinalproject/JavaMain.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
