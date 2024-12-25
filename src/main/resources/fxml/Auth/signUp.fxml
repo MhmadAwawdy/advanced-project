@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarysystem.controllers.Auth.SignUpController">
+    <Label layoutX="184.0" layoutY="124.0" text="Sign Up Account">
+        <font>
+            <Font name="System Bold" size="28.0" />
+        </font>
+    </Label>
+    <TextField fx:id="signup_email" layoutX="129.0" layoutY="202.0" prefHeight="47.0" prefWidth="330.0" promptText="Email address" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </TextField>
+    <TextField fx:id="signup_username" layoutX="129.0" layoutY="272.0" prefHeight="47.0" prefWidth="330.0" promptText="username" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </TextField>
+    <TextField fx:id="signup_phone" layoutX="129.0" layoutY="338.0" prefHeight="47.0" prefWidth="330.0" promptText="Phone Number" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </TextField>
+    <PasswordField fx:id="signup_password" layoutX="129.0" layoutY="406.0" prefHeight="47.0" prefWidth="330.0" promptText="password" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </PasswordField>
+    <PasswordField fx:id="signup_cPassword" layoutX="129.0" layoutY="476.0" prefHeight="47.0" prefWidth="330.0" promptText="Confirm password" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </PasswordField>
+    <Label fx:id="signup_errorMessage" alignment="CENTER" layoutX="3.0" layoutY="545.0" prefHeight="30.0" prefWidth="580.0" textFill="red" visible="false">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Button layoutX="241.0" layoutY="604.0" mnemonicParsing="false" onAction="#register" prefHeight="47.0" prefWidth="106.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Sign Up" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font>
+        <cursor>
+            <Cursor fx:constant="HAND" />
+        </cursor>
+    </Button>
+    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="411.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../Image/email.png" />
+    </ImageView>
+    <ImageView fitHeight="18.0" fitWidth="17.0" layoutX="428.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../Image/user.png" />
+    </ImageView>
+    <ImageView fitHeight="18.0" fitWidth="17.0" layoutX="428.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../Image/phone-circle.png" />
+    </ImageView>
+    <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="420.0" layoutY="413.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../Image/lock.png" />
+    </ImageView>
+    <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="420.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../Image/lock.png" />
+    </ImageView>
+    <AnchorPane layoutX="645.0" layoutY="-6.0" prefHeight="762.0" prefWidth="354.0" style="-fx-background-color: #FBF3DB;">
+        <ImageView fitHeight="272.0" fitWidth="260.0" layoutX="47.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../Image/Logo.png" />
+        </ImageView>
+        <Button fx:id="signup_loginAccount" layoutX="130.0" layoutY="458.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="47.0" prefWidth="94.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="LogIn">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+    </AnchorPane>
+</AnchorPane>

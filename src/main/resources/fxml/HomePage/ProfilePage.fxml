@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="750.0" prefWidth="1000.0" spacing="20" style="-fx-background-color: #DCDCDC; -fx-padding: 40;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarysystem.controllers.HomePage.ProfileController">
+    <HBox prefHeight="100.0" prefWidth="200.0">
+        <Button contentDisplay="TOP" minWidth="0.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="31.0" prefWidth="58.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+    </HBox>
+
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Librarian Profile" />
+
+    <Region HBox.hgrow="ALWAYS" />
+
+    <ImageView fx:id="profileImage" fitHeight="100" fitWidth="100">
+        <Image url="@../../Image/profile.png" />
+    </ImageView>
+    <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Name: Ahmad Ali" />
+    <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="ID: 12345" />
+    <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Email: ahmad.ali@example.com" />
+
+    <Button onAction="#logout" prefHeight="38.0" prefWidth="76.0" style="-fx-background-color: #DCA942; -fx-background-radius: 5px; -fx-font-weight: bold;" text="Log Out" textFill="WHITE" />
+</VBox>
