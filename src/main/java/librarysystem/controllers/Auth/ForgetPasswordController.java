@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -19,7 +20,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EmailsFormController {
+public class ForgetPasswordController {
     @FXML
     private TextField txtEmail;
     @FXML
@@ -115,6 +116,10 @@ public class EmailsFormController {
                 Stage stage = (Stage) verifyCodeButton.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Auth/resetPassword.fxml"));
                 Parent root = loader.load();
+
+                ResetPasswordController resetPasswordController = loader.getController();
+                resetPasswordController.setUserEmail(txtEmail.getText());
+
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Reset Password");
@@ -128,6 +133,7 @@ public class EmailsFormController {
             verificationLabelCode.setVisible(true);
         }
     }
+
 
     private void sendEmail(String recipientEmail, String randomCode) throws MessagingException {
         Properties properties = new Properties();
@@ -163,7 +169,7 @@ public class EmailsFormController {
             message.setText("Your verification code is: " + randomCode);
             return message;
         } catch (Exception e) {
-            Logger.getLogger(EmailsFormController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ForgetPasswordController.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
     }

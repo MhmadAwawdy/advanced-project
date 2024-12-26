@@ -34,7 +34,7 @@ public class ReservationController {
     public void switchForm(ActionEvent event) {
         if (event.getSource() == reserveBook_Back) {
             try {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Client/HomePageClinte.fxml")));
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Client/HomePageClient.fxml")));
                 Stage currentStage = (Stage) reserveBook_Back.getScene().getWindow();
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);

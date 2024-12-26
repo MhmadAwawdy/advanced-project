@@ -1,6 +1,5 @@
 package librarysystem.controllers.Auth;
 
-import librarysystem.utils.PasswordEncryption;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +10,17 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import librarysystem.models.User;
 import librarysystem.models.services.UserDAOimp;
+import librarysystem.utils.PasswordEncryption;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public class SignUpController {
+public class AddNewLibrarianOrStudentController {
 
+    @FXML
+    private Button newClient_Back;
+    @FXML
+    private Button newLibrarian_Back;
     @FXML
     private TextField signup_email;
     @FXML
@@ -33,15 +38,43 @@ public class SignUpController {
 
     private final UserDAOimp userDAOImp;
 
-    public SignUpController() {
+    public AddNewLibrarianOrStudentController() {
         this.userDAOImp = new UserDAOimp();
+    }
+
+    public void switchForm(ActionEvent event) {
+        if (event.getSource() == newClient_Back) {
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml")));
+                Stage currentStage = (Stage) newClient_Back.getScene().getWindow();
+                Scene scene = new Scene(root);
+                currentStage.setScene(scene);
+                currentStage.setTitle("Library Reservation System");
+                currentStage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (event.getSource() == newLibrarian_Back) {
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml")));
+                Stage currentStage = (Stage) newLibrarian_Back.getScene().getWindow();
+                Scene scene = new Scene(root);
+                currentStage.setScene(scene);
+                currentStage.setTitle("Library Reservation System");
+                currentStage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
     public void register() {
         signup_errorMessage.setVisible(false);
         if (!validateInput()) {
-            return; }
+            return;
+        }
         try {
             if (userDAOImp.findByUsername(signup_username.getText()) != null) {
                 displayError(signup_username.getText() + " is already taken");
@@ -108,7 +141,7 @@ public class SignUpController {
     }
 
     @FXML
-    public void switchForm(ActionEvent event) throws IOException {
+    public void switchFormToLogin(ActionEvent event) throws IOException {
         Stage stage = (Stage) signup_loginAccount.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Auth/logIn.fxml"));
         Parent root = loader.load();

@@ -11,7 +11,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
             prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="librarysystem.controllers.HomePage.ReservedBooksController">
+            fx:controller="librarysystem.controllers.Reservation.ReservedBooksController">
     <Label layoutX="403.0" layoutY="31.0" text="Reserved books">
         <font>
             <Font name="System Bold" size="28.0"/>

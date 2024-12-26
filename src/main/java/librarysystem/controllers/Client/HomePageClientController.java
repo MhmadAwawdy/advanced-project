@@ -1,4 +1,4 @@
-package librarysystem.controllers.HomePage;
+package librarysystem.controllers.Client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HomePageClinteController {
+public class HomePageClientController {
     @FXML
     private ImageView imageView;
 
@@ -43,8 +43,7 @@ public class HomePageClinteController {
     }
 
     @FXML
-    private void handleMouseExit(MouseEvent event)
-    {
+    private void handleMouseExit(MouseEvent event) {
         imageView.setEffect(null);
     }
 
@@ -57,9 +56,7 @@ public class HomePageClinteController {
             stage.setTitle("Library Reservation System");
             stage.setScene(scene);
             stage.show();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -8,16 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.Objects;
 
 public class HomePageLibrariansController {
     @FXML
     private Button addBookButton;
-    @FXML
-    private Button updateBookButton;
-    @FXML
-    private Button removeBookButton;
     @FXML
     private Button bookOrderButton;
     @FXML
@@ -50,39 +47,11 @@ public class HomePageLibrariansController {
     @FXML
     public void navigateToAddBook() {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Book/addBook.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Book/ManagingBook.fxml")));
             Stage currentStage = (Stage) addBookButton.getScene().getWindow();
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
-            currentStage.setTitle("Add Book");
-            currentStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void navigateToUpdateBook() {
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Book/update-book.fxml")));
-            Stage currentStage = (Stage) updateBookButton.getScene().getWindow();
-            Scene scene = new Scene(root);
-            currentStage.setScene(scene);
-            currentStage.setTitle("Update Book");
-            currentStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void navigateToRemoveBook() {
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Book/RemoveBookPage.fxml")));
-            Stage currentStage = (Stage) removeBookButton.getScene().getWindow();
-            Scene scene = new Scene(root);
-            currentStage.setScene(scene);
-            currentStage.setTitle("Remove Book");
+            currentStage.setTitle("Add Book And Update");
             currentStage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,7 +61,7 @@ public class HomePageLibrariansController {
     @FXML
     public void navigateToBookOrder() {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/BookReservedAndOrdered.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Reservation/BookReservedAndOrdered.fxml")));
             Stage currentStage = (Stage) bookOrderButton.getScene().getWindow();
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
@@ -106,7 +75,7 @@ public class HomePageLibrariansController {
     @FXML
     public void navigateToReservedBookButton() {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/ReservedBooks.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Reservation/ReservedBooks.fxml")));
             Stage currentStage = (Stage) reservedBookButton.getScene().getWindow();
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
@@ -118,13 +87,13 @@ public class HomePageLibrariansController {
     }
 
     @FXML
-    public void navigateToAddClient() {
+    public void navigateToAddNewLibrarianOrStudent() {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/AddNewClient.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Auth/AddNewLibrarianOrStudent.fxml")));
             Stage currentStage = (Stage) addClientButton.getScene().getWindow();
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
-            currentStage.setTitle("Add Client");
+            currentStage.setTitle("Add Client and Student");
             currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -134,7 +103,7 @@ public class HomePageLibrariansController {
     @FXML
     private void handleBookImageClick(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Book/BookDetails.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Book/BookDetailsLibrarian.fxml")));
             Stage currentStage = (Stage) bookImage.getScene().getWindow();
             Scene scene = new Scene(root);
             currentStage.setScene(scene);

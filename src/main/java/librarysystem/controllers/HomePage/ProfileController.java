@@ -15,8 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ProfileController
-{
+public class ProfileController {
     @FXML
     private ImageView profileImage;
     @FXML

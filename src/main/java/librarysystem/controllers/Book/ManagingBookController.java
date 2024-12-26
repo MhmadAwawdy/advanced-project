@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-public class AddBookController {
+public class ManagingBookController {
 
     @FXML
     private TextField bookTitleField;
@@ -21,6 +21,9 @@ public class AddBookController {
     private TextField isbnField;
     @FXML
     private Button addBook_Back;
+    @FXML
+    private Button updateBook_Back;
+
     @FXML
     public void handleAddBook() {
         String bookTitle = bookTitleField.getText();
@@ -33,11 +36,24 @@ public class AddBookController {
             System.out.println("All fields are required!");
         }
     }
+
     public void switchForm(ActionEvent event) {
         if (event.getSource() == addBook_Back) {
             try {
                 Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml")));
                 Stage currentStage = (Stage) addBook_Back.getScene().getWindow();
+                Scene scene = new Scene(root);
+                currentStage.setScene(scene);
+                currentStage.setTitle("Library Reservation System");
+                currentStage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (event.getSource() == updateBook_Back) {
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml")));
+                Stage currentStage = (Stage) updateBook_Back.getScene().getWindow();
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
                 currentStage.setTitle("Library Reservation System");

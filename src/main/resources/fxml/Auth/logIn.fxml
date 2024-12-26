@@ -21,29 +21,29 @@
             <Font name="System Bold" size="28.0"/>
         </font>
     </Label>
-    <TextField fx:id="login_username" layoutX="505.0" layoutY="131.0" prefHeight="47.0" prefWidth="311.0"
+    <TextField fx:id="login_username" layoutX="505.0" layoutY="211.0" prefHeight="47.0" prefWidth="311.0"
                promptText="username"
                style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
         <font>
             <Font size="14.0"/>
         </font>
     </TextField>
-    <PasswordField fx:id="login_password" layoutX="505.0" layoutY="200.0" prefHeight="47.0" prefWidth="311.0"
+    <PasswordField fx:id="login_password" layoutX="505.0" layoutY="280.0" prefHeight="47.0" prefWidth="311.0"
                    promptText="password"
                    style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
         <font>
             <Font size="14.0"/>
         </font>
     </PasswordField>
-    <TextField fx:id="login_showPassword" layoutX="505.0" layoutY="200.0" prefHeight="47.0" prefWidth="311.0"
+    <TextField fx:id="login_showPassword" layoutX="505.0" layoutY="280.0" prefHeight="47.0" prefWidth="311.0"
                style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;" visible="false">
         <font>
             <Font size="14.0"/>
         </font>
     </TextField>
-    <CheckBox fx:id="login_selectShowPassword" layoutX="539.0" layoutY="256.0" mnemonicParsing="false"
+    <CheckBox fx:id="login_selectShowPassword" layoutX="539.0" layoutY="336.0" mnemonicParsing="false"
               onAction="#showPassword" text="Show Password"/>
-    <Button fx:id="login_btn" layoutX="571.0" layoutY="314.0" mnemonicParsing="false" onAction="#login"
+    <Button fx:id="login_btn" layoutX="571.0" layoutY="394.0" mnemonicParsing="false" onAction="#login"
             prefHeight="40.0" prefWidth="186.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;"
             text="LogIn" textFill="WHITE">
         <font>
@@ -53,41 +53,30 @@
             <Cursor fx:constant="HAND"/>
         </cursor>
     </Button>
-    <Label fx:id="login_errorMessage" alignment="CENTER" layoutX="334.0" layoutY="365.0" prefHeight="20.0"
+    <Label fx:id="login_errorMessage" alignment="CENTER" layoutX="334.0" layoutY="445.0" prefHeight="20.0"
            prefWidth="670.0" textFill="red">
         <font>
             <Font name="System Bold" size="14.0"/>
         </font>
     </Label>
-    <Line endX="239.800048828125" layoutX="620.0" layoutY="413.0" startX="60.4000244140625" style="color: red;"/>
-    <Label layoutX="656.0" layoutY="404.0" style="-fx-background-color: wihte;" text="OR">
+    <Line endX="239.800048828125" layoutX="620.0" layoutY="493.0" startX="60.4000244140625" style="color: red;"/>
+    <Label layoutX="656.0" layoutY="484.0" style="-fx-background-color: wihte;" text="OR">
         <font>
             <Font name="System Italic" size="12.0"/>
         </font>
     </Label>
-    <Line endX="235.20001220703125" layoutX="414.0" layoutY="413.0" startX="53.4000244140625" style="color: red;"/>
-    <Hyperlink fx:id="login_forgetPassword" layoutX="591.0" layoutY="455.0" onAction="#switchForm"
+    <Line endX="235.20001220703125" layoutX="414.0" layoutY="493.0" startX="53.4000244140625" style="color: red;"/>
+    <Hyperlink fx:id="login_forgetPassword" layoutX="591.0" layoutY="535.0" onAction="#switchForm"
                text="Forgot Password ?" textFill="#dca942" underline="true">
         <font>
             <Font name="System Bold" size="16.0"/>
         </font>
     </Hyperlink>
-    <Label layoutX="601.0" layoutY="570.0" text="Don't have an account? "/>
-    <Button fx:id="login_createAccount" layoutX="570.0" layoutY="595.0" mnemonicParsing="false" onAction="#switchForm"
-            prefHeight="40.0" prefWidth="186.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;"
-            text="registration" textFill="WHITE">
-        <font>
-            <Font name="System Bold" size="16.0"/>
-        </font>
-        <cursor>
-            <Cursor fx:constant="HAND"/>
-        </cursor>
-    </Button>
-    <ImageView fitHeight="18.0" fitWidth="17.0" layoutX="782.0" layoutY="146.0" pickOnBounds="true"
+    <ImageView fitHeight="18.0" fitWidth="17.0" layoutX="782.0" layoutY="226.0" pickOnBounds="true"
                preserveRatio="true">
         <Image url="@../../Image/user.png"/>
     </ImageView>
-    <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="774.0" layoutY="207.0" pickOnBounds="true"
+    <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="774.0" layoutY="287.0" pickOnBounds="true"
                preserveRatio="true">
         <Image url="@../../Image/lock.png"/>
     </ImageView>

@@ -4,7 +4,7 @@ module com.example.librarysystem {
     requires javafx.graphics;
     requires javafx.base;
     requires javafx.media;
-
+    requires java.logging;
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -19,11 +19,12 @@ module com.example.librarysystem {
     requires org.hibernate.orm.core;
     requires java.naming;
     requires java.persistence;
+    requires mysql.connector.java;
 
 
-//
+
     opens librarysystem.models to org.hibernate.orm.core;
-//
+
     opens librarysystem.app to javafx.fxml;
     exports librarysystem.app;
 
@@ -39,4 +40,6 @@ module com.example.librarysystem {
     opens librarysystem.controllers.HomePage to javafx.fxml;
     exports librarysystem.controllers.Reservation;
     opens librarysystem.controllers.Reservation to javafx.fxml;
+    exports librarysystem.controllers.Client;
+    opens librarysystem.controllers.Client to javafx.fxml;
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -9,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
             prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="librarysystem.controllers.Book.BookDetailsClientController">
+            fx:controller="librarysystem.controllers.Client.BookDetailsClientController">
     <Label layoutX="349.0" layoutY="59.0" text="Edit book details page ">
         <font>
             <Font name="System Bold" size="28.0"/>
@@ -50,11 +51,17 @@
         <font>
             <Font name="System Bold" size="14.0"/>
         </font>
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
     </Button>
     <Button layoutX="50.0" layoutY="62.0" mnemonicParsing="false" onAction="#backHome" prefHeight="30.0"
             prefWidth="72.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Back">
         <font>
             <Font name="System Bold" size="14.0"/>
         </font>
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
     </Button>
 </AnchorPane>

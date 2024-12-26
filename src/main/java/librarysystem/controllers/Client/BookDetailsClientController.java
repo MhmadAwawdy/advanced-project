@@ -1,4 +1,4 @@
-package librarysystem.controllers.Book;
+package librarysystem.controllers.Client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,22 +12,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class BookDetailsClientController
-{
+public class BookDetailsClientController {
     @FXML
     private Button ReservationRequest;
 
     public void backHome(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Client/HomePageClinte.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Client/HomePageClient.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setTitle("Library Reservation System");
             stage.setScene(scene);
             stage.show();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

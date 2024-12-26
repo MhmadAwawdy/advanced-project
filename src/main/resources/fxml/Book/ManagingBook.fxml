@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
+            prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="librarysystem.controllers.Book.ManagingBookController">
+    <TabPane prefHeight="756.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Add Book">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                <Label layoutX="478.0" layoutY="26.0" text="Add New Book">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="348.0" layoutY="-4.0" preserveRatio="true">
+                    <Image url="@../../Image/addBook.png"/>
+                </ImageView>
+                <Separator layoutY="93.0" prefHeight="3.0" prefWidth="1000.0"/>
+                <ImageView fitHeight="270.0" fitWidth="250.0" layoutX="48.0" layoutY="183.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <Image url="@../../Image/bookImage.jpeg"/>
+                </ImageView>
+                <Hyperlink alignment="CENTER" layoutX="82.0" layoutY="467.0"
+                           style="&#10;            -fx-text-fill: #DCA942; -fx-font-size: 14; -fx-underline: true;&#10;        "
+                           text="Upload Book Image"/>
+                <TextField layoutX="310.0" layoutY="174.0" prefHeight="40.0" prefWidth="534.0" promptText="Book Title"
+                           style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;"/>
+                <TextField layoutX="310.0" layoutY="234.0" prefHeight="40.0" prefWidth="534.0" promptText="Author Name"
+                           style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;"/>
+                <TextField layoutX="310.0" layoutY="298.0" prefHeight="40.0" prefWidth="534.0" promptText="Book Type"
+                           style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;"/>
+                <TextField layoutX="310.0" layoutY="364.0" prefHeight="40.0" prefWidth="534.0" promptText="yyyy-MM-dd"
+                           style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;"/>
+                <TextField layoutX="310.0" layoutY="427.0" prefHeight="40.0" prefWidth="534.0"
+                           promptText="Booking Status"
+                           style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;"/>
+                <HBox alignment="CENTER" layoutX="460.0" layoutY="574.0" spacing="40.0">
+                    <Button prefHeight="50.0" prefWidth="100.0"
+                            style="-fx-background-color: #DCA942; -fx-text-fill: white; -fx-background-radius: 20;"
+                            text="Cancel">
+                        <font>
+                            <Font name="System Bold" size="16.0"/>
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </Button>
+                    <Button prefHeight="50.0" prefWidth="100.0"
+                            style="-fx-background-color: #DCA942; -fx-text-fill: white; -fx-background-radius: 20;"
+                            text="Add">
+                        <font>
+                            <Font name="System Bold" size="16.0"/>
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </Button>
+                </HBox>
+                <Button fx:id="addBook_Back" layoutX="48.0" layoutY="30.0" mnemonicParsing="false"
+                        onAction="#switchForm" prefHeight="31.0" prefWidth="58.0"
+                        style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </AnchorPane>
+        </Tab>
+
+
+        <Tab text="Update Book">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                <Label fx:id="page_tittle" layoutX="388.0" layoutY="43.0" text="Update Book Information:">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="book_tittle" layoutX="293.0" layoutY="173.0" prefHeight="40.0" prefWidth="534.0"
+                           promptText="Book-title"
+                           style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;"/>
+                <TextField fx:id="author_name" layoutX="294.0" layoutY="241.0" prefHeight="40.0" prefWidth="534.0"
+                           promptText="Author-name"
+                           style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;"/>
+                <TextField fx:id="book_type" layoutX="293.0" layoutY="311.0" prefHeight="40.0" prefWidth="534.0"
+                           promptText="Book-type"
+                           style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;"/>
+                <TextField fx:id="puplication_date" layoutX="293.0" layoutY="381.0" prefHeight="40.0" prefWidth="534.0"
+                           promptText="Publication-date"
+                           style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;"/>
+                <TextField fx:id="book_status" layoutX="294.0" layoutY="453.0" prefHeight="40.0" prefWidth="534.0"
+                           promptText="Booking-status"
+                           style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;"/>
+                <Button fx:id="update_btn" layoutX="510.0" layoutY="576.0" mnemonicParsing="false" prefHeight="44.0"
+                        prefWidth="102.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;"
+                        text="Update" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="16.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <ImageView fx:id="page_icon" fitHeight="41.0" fitWidth="57.0" layoutX="338.0" layoutY="42.0"
+                           pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../Image/UpdateBook.jpg"/>
+                </ImageView>
+                <Button fx:id="updateBook_Back" layoutX="37.0" layoutY="47.0" mnemonicParsing="false"
+                        onAction="#switchForm" prefHeight="31.0" prefWidth="58.0"
+                        style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <ImageView fitHeight="270.0" fitWidth="250.0" layoutX="37.0" layoutY="196.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <Image url="@../../Image/bookImage.jpeg"/>
+                </ImageView>
+            </AnchorPane>
+        </Tab>
+    </TabPane>
+</AnchorPane>

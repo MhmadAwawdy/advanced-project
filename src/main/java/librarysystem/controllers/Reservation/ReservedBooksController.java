@@ -1,4 +1,4 @@
-package librarysystem.controllers.HomePage;
+package librarysystem.controllers.Reservation;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,15 +10,15 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-public class BookDetailsLibrarians {
+public class ReservedBooksController {
     @FXML
-    private Button BackToHome;
+    private Button ReservedBooks_Back;
 
     public void switchForm(ActionEvent event) {
-        if (event.getSource() == BackToHome) {
+        if (event.getSource() == ReservedBooks_Back) {
             try {
                 Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml")));
-                Stage currentStage = (Stage) BackToHome.getScene().getWindow();
+                Stage currentStage = (Stage) ReservedBooks_Back.getScene().getWindow();
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
                 currentStage.setTitle("Library Reservation System");
@@ -28,4 +28,5 @@ public class BookDetailsLibrarians {
             }
         }
     }
+
 }
