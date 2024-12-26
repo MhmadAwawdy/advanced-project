@@ -1,5 +1,6 @@
 package librarysystem.utils;
 
+import librarysystem.models.Book;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -20,6 +21,7 @@ public class HibernateUtil {
             Configuration configuration = new Configuration();
             System.out.println("Loading annotated class...");
             configuration.addAnnotatedClass(User.class);
+            configuration.addAnnotatedClass(Book.class);
 
             System.out.println("Loading configuration file...");
             configuration.configure("hibernate.cfg.xml");
