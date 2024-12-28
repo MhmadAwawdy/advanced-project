@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="660.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BookDetailsController">
+   <children>
+      <AnchorPane layoutX="-2.0" prefHeight="704.0" prefWidth="589.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="409.0" layoutX="325.0" layoutY="186.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="4.0" width="256.0" />
+            <Text layoutX="19.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Details Page">
+               <font>
+                  <Font name="Avenir Black" size="42.0" />
+               </font>
+            </Text>
+            <Separator layoutX="1.0" layoutY="64.0" prefHeight="10.0" prefWidth="588.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="9.0" layoutY="186.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="9.0" layoutY="267.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="9.0" layoutY="360.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="9.0" layoutY="450.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="9.0" layoutY="546.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
+            <Label layoutX="174.0" layoutY="194.0" text="اسم الكتاب: ">
+               <font>
+                  <Font name="Apple SD Gothic Neo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="175.0" layoutY="275.0" text="اسم المؤلف: ">
+               <font>
+                  <Font name="Apple SD Gothic Neo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="171.0" layoutY="368.0" text="نوع الكتاب: ">
+               <font>
+                  <Font name="Apple SD Gothic Neo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="169.0" layoutY="458.0" text="تاريخ النشر:">
+               <font>
+                  <Font name="Apple SD Gothic Neo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="168.0" layoutY="554.0" text="حالة الحجز: ">
+               <font>
+                  <Font name="Apple SD Gothic Neo Bold" size="24.0" />
+               </font>
+            </Label>
+            <Separator layoutX="300.0" layoutY="66.0" orientation="VERTICAL" prefHeight="636.0" prefWidth="24.0" />
+            <ImageView fitHeight="65.0" fitWidth="48.0" layoutX="403.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Photos/details.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="487.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: #dca942;" text="Back">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="409.0" fitWidth="248.0" layoutX="329.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
