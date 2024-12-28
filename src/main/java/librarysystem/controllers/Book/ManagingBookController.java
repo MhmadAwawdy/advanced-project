@@ -11,15 +11,14 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import librarysystem.models.Book;
+import librarysystem.models.BookStatus;
 import librarysystem.models.services.BookDAOImp;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Objects;
 
 public class ManagingBookController {
-
 
     @FXML
     private TextField titleField;
@@ -31,8 +30,6 @@ public class ManagingBookController {
     private TextField dateField;
     @FXML
     private TextField statusField;
-
-
     @FXML
     private Button addButton;
     @FXML
@@ -56,12 +53,11 @@ public class ManagingBookController {
     @FXML
     private Label statusErrorText;
 
-    private byte[] bookImage;  // لتخزين الصورة
+    private byte[] bookImage;
     private final BookDAOImp bookDAOImp = new BookDAOImp();
 
     @FXML
     private void initialize() {
-
         addButton.setOnAction(event -> handleButtonClick(event));
         cancelButton.setOnAction(event -> handleButtonClick(event));
         uploadImageLink.setOnAction(event -> loadImage());
@@ -100,9 +96,10 @@ public class ManagingBookController {
         String author = authorField.getText();
         String type = typeField.getText();
         String publishDateStr = dateField.getText();
-        String status = statusField.getText();
+        String statusStr = statusField.getText().trim().toLowerCase();
 
         boolean valid = true;
+
         if (title.isEmpty()) {
             showError(titleField, titleErrorText, "Title is required.");
             valid = false;
@@ -124,8 +121,11 @@ public class ManagingBookController {
             clearError(typeField, typeErrorText);
         }
 
-        if (status.isEmpty()) {
+        if (statusStr.isEmpty()) {
             showError(statusField, statusErrorText, "Status is required.");
+            valid = false;
+        } else if (!statusStr.equals("available")) {
+            showError(statusField, statusErrorText, "Status must be 'available'.");
             valid = false;
         } else {
             clearError(statusField, statusErrorText);
@@ -139,7 +139,7 @@ public class ManagingBookController {
             try {
                 publishDate = Integer.parseInt(publishDateStr);
                 if (publishDate < 1000 || publishDate > 9999) {
-                    showError(dateField, dateErrorText, "Please enter a valid year");
+                    showError(dateField, dateErrorText, "Please enter a valid year.");
                     valid = false;
                 } else {
                     clearError(dateField, dateErrorText);
@@ -151,6 +151,7 @@ public class ManagingBookController {
         }
 
         if (valid) {
+
             if (bookDAOImp.isBookExists(title, author)) {
                 showAlert(Alert.AlertType.WARNING, "Duplicate Book", "This book already exists in the database.");
             } else {
@@ -159,7 +160,7 @@ public class ManagingBookController {
                 newBook.setAuthor(author);
                 newBook.setType(type);
                 newBook.setPublishDate(publishDate);
-                newBook.setStatus(status);
+                newBook.setStatus(BookStatus.AVAILABLE);
                 newBook.setImage(bookImage);
 
                 try {
@@ -176,13 +177,17 @@ public class ManagingBookController {
 
 
     private void showError(TextField field, Label errorLabel, String errorMessage) {
-        errorLabel.setText(errorMessage);
-        errorLabel.setVisible(true);
+        if (errorLabel != null) {
+            errorLabel.setText(errorMessage);
+            errorLabel.setVisible(true);
+        }
         field.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
     }
 
     private void clearError(TextField field, Label errorLabel) {
-        errorLabel.setVisible(false);
+        if (errorLabel != null) {
+            errorLabel.setVisible(false);
+        }
         field.setStyle("-fx-border-color: none;");
     }
 
@@ -194,7 +199,6 @@ public class ManagingBookController {
         statusField.clear();
         imageView.setImage(null);
     }
-
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

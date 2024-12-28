@@ -12,6 +12,8 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tab?>
 
+
+
 <AnchorPane prefHeight="606.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarysystem.controllers.Book.ManagingBookController">
 
@@ -39,7 +41,6 @@
                     <image></image>
                 </ImageView>
 
-
                 <Hyperlink fx:id="uploadImageLink" alignment="CENTER" text="Upload Book Image"
                            AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="470.0" onAction="#loadImage">
                     <style>
@@ -59,9 +60,12 @@
                 <TextField fx:id="dateField" prefHeight="40.0" promptText="Publish year"
                            style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;"
                            AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="340.0"/>
-                <TextField fx:id="statusField" prefHeight="40.0" promptText="Booking Status"
+
+                <TextField fx:id="statusField" prefHeight="40.0" promptText="Book status"
                            style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #DCA942; -fx-border-width: 2;"
                            AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="400.0"/>
+
+
 
 
                 <Label fx:id="titleErrorText" style="-fx-fill: red;" visible="false" AnchorPane.leftAnchor="300.0"
@@ -73,7 +77,8 @@
                 <Label fx:id="dateErrorText" style="-fx-fill: red;" visible="false" AnchorPane.leftAnchor="300.0"
                        AnchorPane.topAnchor="380.0"/>
                 <Label fx:id="statusErrorText" style="-fx-fill: red;" visible="false" AnchorPane.leftAnchor="300.0"
-                       AnchorPane.topAnchor="440.0"/>
+                       AnchorPane.topAnchor="460.0"/>
+
 
                 <HBox alignment="CENTER" spacing="40.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0"
                       AnchorPane.rightAnchor="20.0">
