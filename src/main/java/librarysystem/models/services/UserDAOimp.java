@@ -35,12 +35,6 @@ public class UserDAOimp implements UserDAO {
             session.close();
         }
     }
-
-    /**
-     * البحث عن المستخدم بواسطة اسم المستخدم
-     * @param username اسم المستخدم المراد البحث عنه
-     * @return كائن المستخدم إذا تم العثور عليه، وإلا يعيد null
-     */
     public User findByUsername(String username) {
         Session session = sessionFactory.openSession();
         try {
