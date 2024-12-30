@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
+            prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="librarysystem.controllers.Reservation.ReservedBooksController">
+    <Label layoutX="403.0" layoutY="31.0" text="Reserved books">
+        <font>
+            <Font name="System Bold" size="28.0"/>
+        </font>
+    </Label>
+    <ImageView fitHeight="172.0" fitWidth="107.0" layoutX="112.0" layoutY="124.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../Image/book1.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="195.0" fitWidth="107.0" layoutX="313.0" layoutY="120.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../Image/book2.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="205.0" fitWidth="107.0" layoutX="507.0" layoutY="123.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../Image/book3.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="206.0" fitWidth="107.0" layoutX="733.0" layoutY="123.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../Image/book4.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="207.0" fitWidth="107.0" layoutX="733.0" layoutY="487.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../Image/book2.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="193.0" fitWidth="107.0" layoutX="507.0" layoutY="473.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../Image/bookImage.jpeg"/>
+    </ImageView>
+    <ImageView fitHeight="185.0" fitWidth="107.0" layoutX="313.0" layoutY="487.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../Image/book6.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="217.0" fitWidth="107.0" layoutX="112.0" layoutY="477.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../Image/book5.jpg"/>
+    </ImageView>
+    <Label layoutX="130.0" layoutY="308.0" text="Booking date"/>
+    <Label layoutX="131.0" layoutY="336.0" text="Delivery date"/>
+    <Label layoutX="134.0" layoutY="366.0" text="Client name"/>
+    <Label layoutX="330.0" layoutY="316.0" text="Booking date"/>
+    <Label layoutX="331.0" layoutY="344.0" text="Delivery date"/>
+    <Label layoutX="334.0" layoutY="374.0" text="Client name"/>
+    <Label layoutX="525.0" layoutY="315.0" text="Booking date"/>
+    <Label layoutX="526.0" layoutY="343.0" text="Delivery date"/>
+    <Label layoutX="529.0" layoutY="373.0" text="Client name"/>
+    <Label layoutX="751.0" layoutY="314.0" text="Booking date"/>
+    <Label layoutX="752.0" layoutY="342.0" text="Delivery date"/>
+    <Label layoutX="755.0" layoutY="372.0" text="Client name"/>
+    <Label layoutX="751.0" layoutY="668.0" text="Booking date"/>
+    <Label layoutX="752.0" layoutY="688.0" text="Delivery date"/>
+    <Label layoutX="755.0" layoutY="718.0" text="Client name"/>
+    <Label layoutX="525.0" layoutY="659.0" text="Booking date"/>
+    <Label layoutX="526.0" layoutY="687.0" text="Delivery date"/>
+    <Label layoutX="529.0" layoutY="717.0" text="Client name"/>
+    <Label layoutX="330.0" layoutY="650.0" text="Booking date"/>
+    <Label layoutX="331.0" layoutY="678.0" text="Delivery date"/>
+    <Label layoutX="334.0" layoutY="708.0" text="Client name"/>
+    <Label layoutX="130.0" layoutY="658.0" text="Booking date"/>
+    <Label layoutX="131.0" layoutY="686.0" text="Delivery date"/>
+    <Label layoutX="134.0" layoutY="716.0" text="Client name"/>
+    <Button fx:id="ReservedBooks_Back" layoutX="43.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchForm"
+            prefHeight="31.0" prefWidth="58.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;"
+            text="Back">
+        <font>
+            <Font name="System Bold" size="14.0"/>
+        </font>
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+    </Button>
+</AnchorPane>

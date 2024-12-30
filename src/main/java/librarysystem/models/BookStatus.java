@@ -1,0 +1,8 @@
+package librarysystem.models;
+
+public enum BookStatus {
+    AVAILABLE,
+    UNAVAILABLE,
+    available,
+    unavailable;
+}
