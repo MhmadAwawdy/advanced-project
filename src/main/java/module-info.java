@@ -14,8 +14,11 @@ module com.example.libraryfinalproject {
     requires java.persistence;
     requires org.hibernate.orm.core;
 
-    opens JavaMain to javafx.fxml;
-    exports JavaMain;
-    exports Controllers;
-    opens Controllers to javafx.fxml;
+    // فتح حزمة JavaFX للحزم التي تعمل عبر FXML
+    opens com.example.libraryfinalproject to javafx.fxml;
+    opens com.example.libraryfinalproject.Controllers to javafx.fxml;
+
+    // تصدير الحزم الرئيسية للحزم الخارجية
+    exports com.example.libraryfinalproject;
+    exports com.example.libraryfinalproject. Controllers;
 }

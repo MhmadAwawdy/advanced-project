@@ -1,7 +1,11 @@
-package Controllers;
+package com.example.libraryfinalproject.Controllers;
 
-import Models.Book;
-import DB.BookDAOImpl;
+import com.example.libraryfinalproject.Models.Book;
+
+import com.example.libraryfinalproject.DB.BookDAOImpl;
+import com.example.libraryfinalproject.Models.*;
+
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,24 +20,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GuestPageController {
 
-    @FXML
-    private ImageView imageView, imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
-    @FXML
-    private TextField searchTextField;
-    @FXML
-    private ComboBox<String> filterComboBox;
-    @FXML
-    private ComboBox<String> filterValuesComboBox;
+    @FXML private ImageView imageView, imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
+    @FXML private TextField searchTextField;
+    @FXML private ComboBox<String> filterComboBox;
+    @FXML private ComboBox<String> filterValuesComboBox;
 
     private List<Book> books;
     private String selectedFilter = "";
 
-    private BookDAOImpl bookDAO = new BookDAOImpl();
+
+    private BookService bookService = new BookService(new BookDAOImpl());
 
     @FXML
     public void initialize() {
@@ -46,6 +46,7 @@ public class GuestPageController {
     }
 
     private void setupMouseEffects() {
+
         imageView.setOnMouseClicked(this::handleImageClick);
         imageView1.setOnMouseClicked(this::handleImageClick);
         imageView2.setOnMouseClicked(this::handleImageClick);
@@ -55,7 +56,6 @@ public class GuestPageController {
         imageView6.setOnMouseClicked(this::handleImageClick);
         imageView7.setOnMouseClicked(this::handleImageClick);
         imageView8.setOnMouseClicked(this::handleImageClick);
-
         imageView.setOnMouseEntered(this::handleMouseEnter);
         imageView1.setOnMouseEntered(this::handleMouseEnter);
         imageView2.setOnMouseEntered(this::handleMouseEnter);
@@ -65,7 +65,6 @@ public class GuestPageController {
         imageView6.setOnMouseEntered(this::handleMouseEnter);
         imageView7.setOnMouseEntered(this::handleMouseEnter);
         imageView8.setOnMouseEntered(this::handleMouseEnter);
-
         imageView.setOnMouseExited(this::handleMouseExit);
         imageView1.setOnMouseExited(this::handleMouseExit);
         imageView2.setOnMouseExited(this::handleMouseExit);
@@ -77,16 +76,23 @@ public class GuestPageController {
         imageView8.setOnMouseExited(this::handleMouseExit);
     }
 
+    // هذا هو طريقة التعامل مع الضغط على صورة الكتاب
     public void handleImageClick(MouseEvent event) {
         try {
             int bookId = getBookIdFromImageView((ImageView) event.getSource());
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/BookDetails.fxml"));
+            // الحصول على الكتاب من bookService بناءً على الكتاب المحدد
+            Book book = bookService.getBookById(bookId);
+
+            // تحميل BookDetails.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/BookDetails.fxml"));
             Parent root = loader.load();
 
+            // تمرير الكتاب الى BookDetailsController
             BookDetailsController bookDetailsController = loader.getController();
-            bookDetailsController.setBookDetails(bookId);
+            bookDetailsController.setBookDetails(book);  // تمرير الكائن Book إلى BookDetailsController
 
+            // عرض صفحة التفاصيل
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -112,8 +118,7 @@ public class GuestPageController {
     }
 
     private int getBookIdFromImageView(ImageView imageView) {
-        // عودة قيم افتراضية فقط للتجربة
-        return (int) (Math.random() * 100);
+        return (int) imageView.getUserData();  // يفترض أنك تخزن id الكتاب هنا
     }
 
     private void updateFilterValues() {
@@ -125,40 +130,16 @@ public class GuestPageController {
                     filterValuesComboBox.getItems().addAll("2021", "2022", "2023", "2024");
                     break;
                 case "Author":
-                    filterValuesComboBox.getItems().addAll(getMockAuthors());
+                    filterValuesComboBox.getItems().addAll(bookService.getAuthors());
                     break;
                 case "Title":
-                    filterValuesComboBox.getItems().addAll(getMockTitles());
+                    filterValuesComboBox.getItems().addAll(bookService.getTitles());
                     break;
                 case "Type":
-                    filterValuesComboBox.getItems().addAll(getMockTypes());
+                    filterValuesComboBox.getItems().addAll(bookService.getTypes());
                     break;
             }
         }
-    }
-
-    private List<String> getMockAuthors() {
-        List<String> authors = new ArrayList<>();
-        authors.add("Author 1");
-        authors.add("Author 2");
-        authors.add("Author 3");
-        return authors;
-    }
-
-    private List<String> getMockTitles() {
-        List<String> titles = new ArrayList<>();
-        titles.add("Title 1");
-        titles.add("Title 2");
-        titles.add("Title 3");
-        return titles;
-    }
-
-    private List<String> getMockTypes() {
-        List<String> types = new ArrayList<>();
-        types.add("Fiction");
-        types.add("Non-Fiction");
-        types.add("Science");
-        return types;
     }
 
     @FXML
@@ -169,33 +150,26 @@ public class GuestPageController {
     }
 
     private void filterBooks(String searchText, String selectedFilterValue) {
-
-        List<Book> filteredBooks = bookDAO.getBooksByFilter(selectedFilter, selectedFilterValue);
-        books = new ArrayList<>();
-
-
-        for (Book book : filteredBooks) {
-            if (book.getTitle().toLowerCase().contains(searchText)) {
-                books.add(book);
-            }
-        }
+        books = bookService.getBooksByFilter(searchText, selectedFilterValue, selectedFilter);
         updateBookImages();
     }
 
     private void loadBooks() {
-
-        books = bookDAO.getAllBooks();
+        books = bookService.getAllBooks();
         updateBookImages();
     }
 
     private void updateBookImages() {
-
+        // هنا نقوم بتحديث الصور
         for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
             ImageView imageView = getImageViewForPosition(i);
             if (book.getImage() != null) {
                 Image image = new Image(book.getImage());
                 imageView.setImage(image);
+
+                // ربط الـ bookId مع الـ ImageView
+                imageView.setUserData(book.getId());
             }
         }
     }

@@ -1,13 +1,10 @@
-package Models;
+package com.example.libraryfinalproject.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "books")
+@Table(name = "book")
 public class Book {
 
     @Id
@@ -17,12 +14,15 @@ public class Book {
     private String title;
     private String author;
     private String type;
-    private String publishDate;
+
+    @Column(name = "publish_date")
+    private LocalDate publishDate;  // استخدام LocalDate بدلاً من String لتمثيل التاريخ
+
     private String status;
     private String image;
 
-
-    public Book(String title, String author, String type, String publishDate, String status, String image) {
+    // الكونستركتور الكامل
+    public Book(String title, String author, String type, LocalDate publishDate, String status, String image) {
         this.title = title;
         this.author = author;
         this.type = type;
@@ -31,6 +31,7 @@ public class Book {
         this.image = image;
     }
 
+    // الكونستركتور الفارغ
     public Book() {}
 
     // Getters و Setters
@@ -66,11 +67,11 @@ public class Book {
         this.type = type;
     }
 
-    public String getPublishDate() {
+    public LocalDate getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(String publishDate) {
+    public void setPublishDate(LocalDate publishDate) {
         this.publishDate = publishDate;
     }
 
