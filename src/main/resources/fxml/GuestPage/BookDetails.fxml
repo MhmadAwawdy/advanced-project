@@ -58,14 +58,13 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <ImageView fitHeight="45.0" fitWidth="40.0" layoutX="303.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="49.0" fitWidth="45.0" layoutX="295.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
-
-               </image>
-            </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="51.0" layoutX="517.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../../Photos/details.png" />
+               </image></ImageView>
+            <ImageView fitHeight="58.0" fitWidth="61.0" layoutX="515.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
-
+                  <Image url="@../../Photos/pngtree-design-return-arrow-png-image_13159428.png" />
                </image>
             </ImageView>
          </children>

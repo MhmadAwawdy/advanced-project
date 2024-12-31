@@ -1,11 +1,31 @@
 package librarysystem.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "book")
 public class Book2 {
+
+    @Id
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "author")
     private String author;
+
+    @Column(name = "type")
     private String type;
+
+    @Column(name = "publish_date")
     private String publishDate;
+
+    @Column(name = "image")
     private String image;
 
 
@@ -18,6 +38,7 @@ public class Book2 {
         this.image = image;
     }
 
+
     public Long getId() {
         return id;
     }
@@ -25,6 +46,7 @@ public class Book2 {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public String getTitle() {
         return title;
@@ -34,6 +56,7 @@ public class Book2 {
         this.title = title;
     }
 
+
     public String getAuthor() {
         return author;
     }
@@ -41,6 +64,7 @@ public class Book2 {
     public void setAuthor(String author) {
         this.author = author;
     }
+
 
     public String getType() {
         return type;
@@ -58,11 +82,24 @@ public class Book2 {
         this.publishDate = publishDate;
     }
 
+
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Book2{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", type='" + type + '\'' +
+                ", publishDate='" + publishDate + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

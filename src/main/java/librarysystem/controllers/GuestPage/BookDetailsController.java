@@ -10,14 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class BookDetailsController {
 
-    // المتغيرات المرتبطة مع الـ FXML
     @FXML
     private Label bookTitleLabel;
     @FXML
@@ -31,58 +29,40 @@ public class BookDetailsController {
 
     private Book2 selectedBook;
 
-
     public void setBookDetails(Book2 book) {
         this.selectedBook = book;
-        displayBookDetails(book);
+        displayBookDetails();
     }
 
+    private void displayBookDetails() {
+        if (selectedBook != null) {
+            bookTitleLabel.setText(selectedBook.getTitle());
+            authorLabel.setText(selectedBook.getAuthor());
+            publishDateLabel.setText(selectedBook.getPublishDate());
+            statusLabel.setText(selectedBook.getType());
 
-    private void displayBookDetails(Book2 book) {
-        if (book != null) {
-            // عرض عنوان الكتاب
-            bookTitleLabel.setText("Book Title: " + book.getTitle());
-
-            // عرض اسم المؤلف
-            authorLabel.setText("Author Name: " + book.getAuthor());
-
-            // عرض نوع الكتاب
-            publishDateLabel.setText("Book Type: " + book.getType()); // تم استبداله بـ getType()
-
-            // عرض تاريخ النشر
-            statusLabel.setText("Publication date: " + book.getPublishDate()); // تم استبداله بـ getPublishDate()
-
-            // تحميل الصورة الخاصة بالكتاب إذا كانت موجودة
-            if (book.getImage() != null && !book.getImage().isEmpty()) {
+            if (selectedBook.getImage() != null && !selectedBook.getImage().isEmpty()) {
                 try {
-                    Image image = new Image(book.getImage());
+                    Image image = new Image(selectedBook.getImage());
                     bookImageView.setImage(image);
                 } catch (Exception e) {
-                    bookImageView.setImage(null);  // في حالة فشل تحميل الصورة
-                    System.out.println("فشل في تحميل الصورة: " + e.getMessage());
+                    bookImageView.setImage(null);
+                    System.out.println("Failed to load image: " + e.getMessage());
                 }
             } else {
-                bookImageView.setImage(null);  // إذا لم يكن هناك صورة
+                bookImageView.setImage(null);
             }
         }
     }
 
-    // العودة إلى الصفحة السابقة عند الضغط على زر العودة
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
         try {
-            // قم بتحميل الواجهة الخاصة بالصفحة الرئيسية أو أي صفحة ترغب في العودة إليها
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GuestPage.fxml"));
             Parent root = loader.load();
 
-            // الحصول على المرحلة الحالية وتغيير المشهد
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            // إغلاق المشهد الحالي (اختياري)
-            stage.close();
-            stage.show();
+            stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
         }

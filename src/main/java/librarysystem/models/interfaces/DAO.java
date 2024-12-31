@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface DAO {
 
+
     List<Book2> getAllBooks();
+
 
     List<Book2> getBooksBySearch(String searchText);
 
@@ -30,6 +32,7 @@ public interface DAO {
 
 
     List<Book2> getBooksByYear(String year);
+
 
     List<Book2> getBooksByAuthor(String author);
 

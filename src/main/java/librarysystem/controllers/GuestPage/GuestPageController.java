@@ -1,9 +1,6 @@
 package librarysystem.controllers.GuestPage;
 
-
-import librarysystem.models.interfaces.DAO;
 import librarysystem.models.Book2;
-import librarysystem.models.BookDAOImpl;
 import librarysystem.models.BookService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,77 +37,51 @@ public class GuestPageController {
     private ComboBox<String> titleComboBox;
     @FXML
     private Button searchButton;
-    @FXML
-    private Button sendButton;
 
     private List<Book2> books;
     private List<Book2> filteredBooks;
-    private BookService bookService;
+    private BookService bookService = new BookService();
 
     @FXML
     public void initialize() {
-        bookService = new BookService(new BookDAOImpl());
         loadBooks();
         setupInitialState();
         setupEventHandlers();
     }
 
+    private void loadBooks() {
+        books = bookService.getAllBooks();  // جلب كل الكتب من الخدمة
+        filteredBooks = books;  // تعيين الفلاتر إلى جميع الكتب أولاً
+        updateBookImages();  // تحديث الصور بعد تحميل الكتب
+    }
+
     private void setupInitialState() {
-        // Populate ComboBoxes with unique values from database
-        publishDateComboBox.getItems().addAll(bookService.getAllBooks().stream()
-                .map(Book2::getPublishDate)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList()));
+        // إعداد قائمة تواريخ النشر
+        publishDateComboBox.getItems().addAll(generateYearOptions());
 
-        typeComboBox.getItems().addAll(bookService.getAllBooks().stream()
-                .map(Book2::getType)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList()));
+        // إعداد قوائم الفلاتر الأخرى مثل النوع والمؤلف والعنوان
+        typeComboBox.getItems().addAll(
+                books.stream().map(Book2::getType).distinct().sorted().collect(Collectors.toList())
+        );
+        authorComboBox.getItems().addAll(
+                books.stream().map(Book2::getAuthor).distinct().sorted().collect(Collectors.toList())
+        );
+        titleComboBox.getItems().addAll(
+                books.stream().map(Book2::getTitle).distinct().sorted().collect(Collectors.toList())
+        );
+    }
 
-        authorComboBox.getItems().addAll(bookService.getAllBooks().stream()
-                .map(Book2::getAuthor)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList()));
-
-        titleComboBox.getItems().addAll(bookService.getAllBooks().stream()
-                .map(Book2::getTitle)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList()));
+    private List<String> generateYearOptions() {
+        return List.of("2023", "2022", "2021", "2020", "2019", "2018", "2017");
     }
 
     private void setupEventHandlers() {
-        searchButton.setOnAction(event -> handleSearch());
-        sendButton.setOnAction(event -> handleSend());
-        publishDateComboBox.setOnAction(event -> handleFilterChange());
-        typeComboBox.setOnAction(event -> handleFilterChange());
-        authorComboBox.setOnAction(event -> handleFilterChange());
-        titleComboBox.setOnAction(event -> handleFilterChange());
-
-        setupMouseEffects();
+        // تعيين الإجراء عند الضغط على زر "بحث" للبحث وتطبيق الفلاتر
+        searchButton.setOnAction(event -> applyFilters());
+        setupMouseEffects();  // إضافة تأثيرات الفأرة
     }
 
-    private void loadBooks() {
-        books = bookService.getAllBooks();  // Retrieve all books from the database
-        filteredBooks = books; // Initialize filteredBooks with all books initially
-        updateBookImages(); // Display all books on load
-    }
-
-    private void handleSearch() {
-        applyFilters();
-    }
-
-    private void handleSend() {
-        applyFilters();
-    }
-
-    private void handleFilterChange() {
-        applyFilters();
-    }
-
+    // تطبيق الفلاتر بما في ذلك البحث والنصوص المحددة من القوائم المنسدلة
     private void applyFilters() {
         String searchText = searchField.getText().toLowerCase();
         String selectedPublishDate = publishDateComboBox.getValue();
@@ -118,74 +89,48 @@ public class GuestPageController {
         String selectedAuthor = authorComboBox.getValue();
         String selectedTitle = titleComboBox.getValue();
 
-        // Apply filters based on the combo box and text field selections
         filteredBooks = books.stream()
-                .filter(book -> {
-                    boolean matchesSearch = searchText.isEmpty() ||
-                            book.getTitle().toLowerCase().contains(searchText) ||
-                            book.getAuthor().toLowerCase().contains(searchText) ||
-                            book.getType().toLowerCase().contains(searchText);
-
-                    boolean matchesPublishDate = selectedPublishDate == null ||
-                            book.getPublishDate().equals(selectedPublishDate);
-
-                    boolean matchesType = selectedType == null ||
-                            book.getType().equals(selectedType);
-
-                    boolean matchesAuthor = selectedAuthor == null ||
-                            book.getAuthor().equals(selectedAuthor);
-
-                    boolean matchesTitle = selectedTitle == null ||
-                            book.getTitle().equals(selectedTitle);
-
-                    return matchesSearch && matchesPublishDate && matchesType &&
-                            matchesAuthor && matchesTitle;
-                })
+                .filter(book -> (searchText.isEmpty() || book.getTitle().toLowerCase().contains(searchText)) &&
+                        (selectedPublishDate == null || book.getPublishDate().equals(selectedPublishDate)) &&
+                        (selectedType == null || book.getType().equals(selectedType)) &&
+                        (selectedAuthor == null || book.getAuthor().equals(selectedAuthor)) &&
+                        (selectedTitle == null || book.getTitle().equals(selectedTitle)))
                 .collect(Collectors.toList());
 
-        updateBookImages();  // Update book images based on filtered results
+        updateBookImages();  // تحديث الصور بعد تطبيق الفلاتر
     }
 
     private void updateBookImages() {
+        // تحديث الصور المعروضة بعد تطبيق الفلاتر
         ImageView[] imageViews = {imageView, imageView1, imageView2, imageView3, imageView4,
                 imageView5, imageView6, imageView7, imageView8, imageView9};
 
-        // Clear previous book images and set user data to null
+        // مسح الصور الحالية
         for (ImageView iv : imageViews) {
-            if (iv != null) {
-                iv.setImage(null);
-                iv.setUserData(null);
-            }
+            iv.setImage(null);
+            iv.setUserData(null);
         }
 
-        // Display images based on filtered books
+        // إضافة الكتب المصفاة إلى الصور المتاحة
         for (int i = 0; i < filteredBooks.size() && i < imageViews.length; i++) {
             Book2 book = filteredBooks.get(i);
             ImageView iv = imageViews[i];
-
-            if (iv != null && book.getImage() != null && !book.getImage().isEmpty()) {
-                try {
-                    Image image = new Image(book.getImage());
-                    iv.setImage(image);
-                    iv.setUserData(book.getId());  // Store book ID in the ImageView's user data
-                } catch (Exception e) {
-                    System.err.println("Error loading image for book: " + book.getTitle());
-                    e.printStackTrace();
-                }
+            if (!book.getImage().isEmpty()) {
+                iv.setImage(new Image(book.getImage()));
+                iv.setUserData(book.getId());
             }
         }
     }
 
     private void setupMouseEffects() {
+        // إضافة تأثير الفأرة عند التمرير على الصور
         ImageView[] imageViews = {imageView, imageView1, imageView2, imageView3, imageView4,
                 imageView5, imageView6, imageView7, imageView8, imageView9};
 
         for (ImageView iv : imageViews) {
-            if (iv != null) {
-                iv.setOnMouseClicked(this::handleImageClick);
-                iv.setOnMouseEntered(this::handleMouseEnter);
-                iv.setOnMouseExited(this::handleMouseExit);
-            }
+            iv.setOnMouseClicked(this::handleImageClick);
+            iv.setOnMouseEntered(this::handleMouseEnter);
+            iv.setOnMouseExited(this::handleMouseExit);
         }
     }
 
@@ -194,36 +139,44 @@ public class GuestPageController {
         try {
             ImageView clickedImage = (ImageView) event.getSource();
             Long bookId = (Long) clickedImage.getUserData();
-
             if (bookId != null) {
                 Book2 book = bookService.getBookById(bookId);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/BookDetails.fxml"));
                 Parent root = loader.load();
 
                 BookDetailsController controller = loader.getController();
-                controller.setBookDetails(book);  // Passing the selected book to the BookDetailsController
+                controller.setBookDetails(book);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
-                stage.show();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void handleMouseEnter(MouseEvent event) {
+    @FXML
+    public void handleMouseEnter(MouseEvent event) {
         ImageView imageView = (ImageView) event.getSource();
-        DropShadow shadow = new DropShadow();
-        shadow.setOffsetX(5.0);
-        shadow.setOffsetY(5.0);
-        shadow.setRadius(10.0);
-        shadow.setColor(javafx.scene.paint.Color.GRAY);
-        imageView.setEffect(shadow);
+        imageView.setEffect(new DropShadow());  // إضافة تأثير الظل عند التمرير
     }
 
-    private void handleMouseExit(MouseEvent event) {
+    @FXML
+    public void handleMouseExit(MouseEvent event) {
         ImageView imageView = (ImageView) event.getSource();
-        imageView.setEffect(null);
+        imageView.setEffect(null);  // إزالة تأثير الظل عند الخروج
+    }
+
+    @FXML
+    private void handleSearch() {
+        // عند الضغط على زر البحث، نقوم بتطبيق الفلاتر بشكل تلقائي
+        applyFilters();
+    }
+
+    @FXML
+    private void handleSend() {
+        // عند الضغط على زر "إرسال"، نطبع رسالة للتحقق من العمل
+        System.out.println("Send action triggered");
+        // لا داعي لكتابة كود إضافي هنا، لأن الفلاتر يتم تطبيقها بالفعل عند الضغط على البحث
     }
 }
