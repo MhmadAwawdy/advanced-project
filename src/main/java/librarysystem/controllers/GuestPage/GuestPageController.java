@@ -182,11 +182,11 @@ public class GuestPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/librarysystem/views/BookDetails.fxml"));
             Parent root = loader.load();
 
-            // تحويل تاريخ النشر من int إلى String
+
             String publishDateString = String.valueOf(book.getPublishDate());
 
-            // استخدام toString لتحويل BookStatus إلى String
-            String status = book.getStatus().toString();  // استخدم toString لتحويله إلى String
+
+            String status = book.getStatus().toString();
 
 
             BookDetailsController bookDetailsController = loader.getController();
@@ -195,7 +195,7 @@ public class GuestPageController {
                     book.getAuthor(),
                     publishDateString,
                     book.getType(),
-                    status,  // الآن تم تمرير status كـ String
+                    status,
                     bookService.getImageByBookTitle(book.getTitle())
             );
 
@@ -261,17 +261,17 @@ public class GuestPageController {
     @FXML
     private void handleReload(ActionEvent event) {
         try {
-            // تحميل الـFXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuestPage/GuestPage.fxml"));
-            Parent root = loader.load();  // تحميل الـFXML واستخدام Parent بدلاً من AnchorPane
 
-            // الحصول على الـStage (نافذة التطبيق)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuestPage/GuestPage.fxml"));
+            Parent root = loader.load();
+
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // إنشاء مشهد جديد
+
             Scene newScene = new Scene(root);
 
-            // تعيين المشهد الجديد للـStage
+
             stage.setScene(newScene);
             stage.show();
             System.out.println("The reload button has been pressed!");
