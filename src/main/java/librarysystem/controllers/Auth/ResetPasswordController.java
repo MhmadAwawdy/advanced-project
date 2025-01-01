@@ -16,15 +16,10 @@ import org.hibernate.query.Query;
 import java.io.IOException;
 
 public class ResetPasswordController {
-    @FXML
-    private Button BackResetPassword;
-    @FXML
-    private PasswordField newPasswordField;
-    @FXML
-    private PasswordField confirmPasswordField;
-
-    @FXML
-    private Label resetPasswordMessage;
+    @FXML private Button BackResetPassword;
+    @FXML private PasswordField newPasswordField;
+    @FXML private PasswordField confirmPasswordField;
+    @FXML private Label resetPasswordMessage;
 
     private String userEmail;
 
@@ -59,7 +54,6 @@ public class ResetPasswordController {
             resetPasswordMessage.setVisible(true);
             return;
         }
-
         if (!newPassword.equals(confirmPassword)) {
             resetPasswordMessage.setText("Passwords do not match.");
             resetPasswordMessage.setVisible(true);
@@ -71,7 +65,7 @@ public class ResetPasswordController {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
 
-            Query query = session.createQuery("UPDATE User SET password = :password WHERE email = :email");
+            Query query = session.createQuery("UPDATE Librarian SET password = :password WHERE email = :email");
             query.setParameter("password", hashedPassword);
             query.setParameter("email", userEmail);
             int result = query.executeUpdate();
@@ -85,7 +79,7 @@ public class ResetPasswordController {
                 newPasswordField.clear();
                 confirmPasswordField.clear();
             } else {
-                resetPasswordMessage.setText("Error: User not found.");
+                resetPasswordMessage.setText("Error: Librarian not found.");
                 resetPasswordMessage.setVisible(true);
             }
         } catch (Exception e) {
@@ -94,4 +88,5 @@ public class ResetPasswordController {
             e.printStackTrace();
         }
     }
+
 }

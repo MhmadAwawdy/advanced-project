@@ -73,7 +73,7 @@
                     <Insets/>
                 </VBox.margin>
             </ImageView>
-            <Label prefHeight="18.0" prefWidth="124.0" text="Number of Students">
+            <Label fx:id="studentCountLabel" prefHeight="18.0" prefWidth="124.0" text="Number of Students">
                 <padding>
                     <Insets top="5.0"/>
                 </padding>
@@ -84,7 +84,7 @@
                     <Insets top="25.0"/>
                 </VBox.margin>
             </ImageView>
-            <Label text="Number of Books">
+            <Label fx:id="bookCountLabel" text="Number of Books">
                 <padding>
                     <Insets top="5.0"/>
                 </padding>

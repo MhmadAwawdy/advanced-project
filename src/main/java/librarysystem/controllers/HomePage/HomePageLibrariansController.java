@@ -5,9 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import librarysystem.utils.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -25,10 +29,15 @@ public class HomePageLibrariansController {
     private ImageView userIcon;
     @FXML
     private ImageView bookImage;
-
+    @FXML
+    private Label studentCountLabel;  // Label for number of students
+    @FXML
+    private Label bookCountLabel;
     @FXML
     private void initialize() {
+        // Initialize the label with the database values
         userIcon.setOnMouseClicked(event -> openProfile());
+        fetchCountsFromDatabase();
     }
 
     @FXML
@@ -110,6 +119,23 @@ public class HomePageLibrariansController {
             currentStage.setTitle("Book Details");
             currentStage.show();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void fetchCountsFromDatabase() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Query to get number of students
+            Query<Long> studentQuery = session.createQuery("SELECT COUNT(*) FROM Student", Long.class);
+            Long studentCount = studentQuery.uniqueResult();
+
+            // Query to get number of books
+            Query<Long> bookQuery = session.createQuery("SELECT COUNT(*) FROM Book", Long.class);
+            Long bookCount = bookQuery.uniqueResult();
+
+            // Update labels with the counts
+            studentCountLabel.setText("Number of Students: " + studentCount);
+            bookCountLabel.setText("Number of Books: " + bookCount);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

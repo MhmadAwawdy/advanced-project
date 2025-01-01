@@ -43,4 +43,5 @@ public class WelcomePageController {
             e.printStackTrace();
         }
     }
+
 }

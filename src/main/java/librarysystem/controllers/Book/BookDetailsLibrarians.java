@@ -28,4 +28,18 @@ public class BookDetailsLibrarians {
             }
         }
     }
+
+    public void goToStudent(ActionEvent actionEvent)
+    {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Reservation/SubmitReservation.fxml")));
+            Stage currentStage = (Stage) BackToHome.getScene().getWindow();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.setTitle("Library Reservation System");
+            currentStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

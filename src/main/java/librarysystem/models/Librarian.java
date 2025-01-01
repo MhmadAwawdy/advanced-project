@@ -5,8 +5,8 @@ import java.sql.Date;
 
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "librarian")
+public class Librarian {
     @Id
     @GeneratedValue
     private int id;
@@ -25,6 +25,10 @@ public class User {
 
     @Column(name = "date")
     private Date date;
+
+    //admin update
+    @Column(name = "role")
+    private String role;
 
 
     public int getId() {
@@ -68,4 +72,7 @@ public class User {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public String getRole() {return role;}
+    public void setRole(String role) {this.role = role;}
 }

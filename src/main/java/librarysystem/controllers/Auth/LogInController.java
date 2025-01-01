@@ -1,8 +1,9 @@
 package librarysystem.controllers.Auth;
 
-import librarysystem.models.User;
-import librarysystem.models.services.UserDAOimp;
+import librarysystem.models.Librarian;
+import librarysystem.models.services.LibrarianDAOimp;
 import librarysystem.utils.PasswordEncryption;
+import librarysystem.utils.SessionManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -27,10 +29,36 @@ public class LogInController implements Initializable {
     @FXML private Label login_errorMessage;
     @FXML private Button login_Back;
 
-    private final UserDAOimp userDAOImp;
+    private final LibrarianDAOimp librarianDAOimp;
 
     public LogInController() {
-        this.userDAOImp = new UserDAOimp();
+        this.librarianDAOimp = new LibrarianDAOimp();
+    }
+
+    public void switchForm(ActionEvent event) {
+        if (event.getSource() == login_forgetPassword) {
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Auth/forgotPassword.fxml")));
+                Stage currentStage = (Stage) login_forgetPassword.getScene().getWindow();
+                Scene scene = new Scene(root);
+                currentStage.setScene(scene);
+                currentStage.setTitle("Forgot Password");
+                currentStage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (event.getSource() == login_Back) {
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Auth/WelcomePage.fxml")));
+                Stage currentStage = (Stage) login_Back.getScene().getWindow();
+                Scene scene = new Scene(root);
+                currentStage.setScene(scene);
+                currentStage.setTitle("Library Reservation System");
+                currentStage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void login() {
@@ -42,18 +70,24 @@ public class LogInController implements Initializable {
             login_errorMessage.setVisible(true);
         } else {
             try {
-                User user = userDAOImp.findByUsername(login_username.getText());
-                if (user != null) {
-                    String storedHashedPassword = user.getPassword();
+                Librarian librarian = librarianDAOimp.findByUsername(login_username.getText());
+                if (librarian != null) {
+                    String storedHashedPassword = librarian.getPassword();
                     String enteredHashedPassword = PasswordEncryption.hashPassword(login_password.getText());
 
                     if (storedHashedPassword.equals(enteredHashedPassword)) {
+                        // Set the logged-in user in SessionManager
+                        SessionManager.setLoggedInLibrarian(librarian);
+
+                        // Load the appropriate home page
                         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml")));
                         Stage stage = new Stage();
                         stage.setTitle("Home Library System");
                         Scene scene = new Scene(root);
                         stage.setScene(scene);
                         stage.show();
+
+                        // Close the login window
                         login_btn.getScene().getWindow().hide();
                     } else {
                         login_errorMessage.setText("Incorrect username or password.");
@@ -80,32 +114,6 @@ public class LogInController implements Initializable {
             login_showPassword.setText(login_showPassword.getText());
             login_showPassword.setVisible(false);
             login_password.setVisible(true);
-        }
-    }
-
-    public void switchForm(ActionEvent event) {
-        if (event.getSource() == login_forgetPassword) {
-            try {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Auth/forgotPassword.fxml")));
-                Stage currentStage = (Stage) login_forgetPassword.getScene().getWindow();
-                Scene scene = new Scene(root);
-                currentStage.setScene(scene);
-                currentStage.setTitle("Forgot Password");
-                currentStage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (event.getSource() == login_Back) {
-            try {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Auth/WelcomePage.fxml")));
-                Stage currentStage = (Stage) login_Back.getScene().getWindow();
-                Scene scene = new Scene(root);
-                currentStage.setScene(scene);
-                currentStage.setTitle("Library Reservation System");
-                currentStage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 

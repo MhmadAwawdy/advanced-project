@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 public class BookDAOImp implements BookDAO {
 
     private HibernateUtil hibernateUtil;
@@ -51,6 +53,22 @@ public class BookDAOImp implements BookDAO {
 
         } catch (Exception e) {
             throw new RuntimeException("Failed to check if book exists: " + e.getMessage(), e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+    public List<Book> searchBooks(String keyword) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            String hql = "FROM Book WHERE title LIKE :keyword OR author LIKE :keyword";
+            Query<Book> query = session.createQuery(hql, Book.class);
+            query.setParameter("keyword", "%" + keyword + "%");
+            return query.list();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to search books: " + e.getMessage(), e);
         } finally {
             if (session != null) {
                 session.close();
