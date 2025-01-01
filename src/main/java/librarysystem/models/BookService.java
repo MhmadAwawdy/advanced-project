@@ -1,76 +1,104 @@
 package librarysystem.models;
-import librarysystem.models.services.bookDAOImp;
-import librarysystem.models.interfaces.DAO;
-import librarysystem.models.services.bookDAOImp;
 
+import javafx.scene.image.Image;
+import librarysystem.models.services.BookDAO;
 import java.util.List;
 
 public class BookService {
-
-    private DAO dao;
+    private final BookDAO bookDAO;
 
     public BookService() {
-
-        this.dao = new bookDAOImp();
+        this.bookDAO = new BookDAO();
     }
 
-
-    public List<Book2> getAllBooks() {
-        return dao.getAllBooks();
+    public List<Book> getAllBooks() {
+        try {
+            return bookDAO.getAllBooks();
+        } catch (Exception e) {
+            System.out.println("Error fetching all books: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
 
-
-    public List<Book2> searchBooks(String searchText) {
-        return dao.getBooksBySearch(searchText);
+    public List<Book> filterBooks(String searchText, String selectedTitle, String selectedAuthor, String selectedDate) {
+        try {
+            return bookDAO.filterBooks(searchText, selectedTitle, selectedAuthor, selectedDate);
+        } catch (Exception e) {
+            System.out.println("Error filtering books: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
 
-
-    public List<Book2> filterBooks(String filter, String filterValue) {
-        return dao.getBooksByFilter(filter, filterValue);
+    public List<Book> filterBooksByTitle(String title) {
+        return filterBooks(title, null, null, null);
     }
 
-
-    public Book2 getBookById(Long id) {
-        return dao.getBookById(id);
+    public List<Book> filterBooksByAuthor(String author) {
+        return filterBooks(null, null, author, null);
     }
 
-
-    public List<String> getAuthors() {
-        return dao.getAuthors();
+    public List<Book> filterBooksByDate(String date) {
+        return filterBooks(null, null, null, date);
     }
 
-
-    public List<String> getTitles() {
-        return dao.getTitles();
+    public List<Book> searchBooksByTitle(String title) {
+        try {
+            return bookDAO.getBooksByTitle(title);
+        } catch (Exception e) {
+            System.out.println("Error fetching books by title: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
 
-
-    public List<String> getGenres() {
-        return dao.getGenres();
+    public boolean isBookExists(String title, String author) {
+        try {
+            return bookDAO.isBookExists(title, author);
+        } catch (Exception e) {
+            System.out.println("Error checking if book exists: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
 
-
-    public List<String> getYears() {
-        return dao.getYears();
+    public void saveBook(Book book) {
+        try {
+            bookDAO.save(book);
+        } catch (Exception e) {
+            System.out.println("Error saving the book: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-
-    public List<Book2> getBooksByYear(String year) {
-        return dao.getBooksByYear(year);
+    public Book getBookDetailsByTitle(String title) {
+        try {
+            return bookDAO.getBookDetailsByTitle(title);
+        } catch (Exception e) {
+            System.out.println("Error fetching book details: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
 
-
-    public List<Book2> getBooksByAuthor(String author) {
-        return dao.getBooksByAuthor(author);
+    public Image getImageByBookTitle(String title) {
+        try {
+            return bookDAO.getImageByBookTitle(title);
+        } catch (Exception e) {
+            System.out.println("Error fetching book image: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
 
-
-    public List<Book2> getBooksByTitle(String title) {
-        return dao.getBooksByTitle(title);
-    }
-
-
-    public List<Book2> getBooksByGenre(String genre) {
-        return dao.getBooksByGenre(genre);
+    public List<String> getAvailableTitles() {
+        try {
+            return bookDAO.getAvailableTitles();
+        } catch (Exception e) {
+            System.out.println("Error fetching available titles: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
 }

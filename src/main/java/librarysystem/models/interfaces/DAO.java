@@ -1,43 +1,36 @@
 package librarysystem.models.interfaces;
 
-import librarysystem.models.Book2;
-
+import librarysystem.models.Book;
+import javafx.scene.image.Image;
 import java.util.List;
 
 public interface DAO {
 
+    // لحفظ الكتاب في قاعدة البيانات
+    void save(Book book) throws Exception;
 
-    List<Book2> getAllBooks();
+    // للتحقق مما إذا كان الكتاب موجودًا في قاعدة البيانات
+    boolean isBookExists(String title, String author) throws Exception;
 
+    // لتصفية الكتب بناءً على معايير محددة
+    List<Book> filterBooks(String searchText, String selectedTitle, String selectedAuthor, String selectedDate) throws Exception;
 
-    List<Book2> getBooksBySearch(String searchText);
+    // للحصول على جميع الكتب
+    List<Book> getAllBooks() throws Exception;
 
+    // للحصول على تفاصيل كتاب باستخدام العنوان
+    Book getBookDetailsByTitle(String title) throws Exception;
 
-    List<Book2> getBooksByFilter(String filter, String filterValue);
+    // للحصول على صورة الكتاب باستخدام العنوان
+    Image getImageByBookTitle(String title) throws Exception;
 
+    // للحصول على العناوين المتاحة في قاعدة البيانات
+    List<String> getAvailableTitles() throws Exception;
 
-    Book2 getBookById(Long id);
+    // للحصول على المؤلفين المتاحين
+    List<String> getAvailableAuthors() throws Exception;
 
-
-    List<String> getAuthors();
-
-
-    List<String> getTitles();
-
-
-    List<String> getGenres();
-
-
-    List<String> getYears();
-
-
-    List<Book2> getBooksByYear(String year);
-
-
-    List<Book2> getBooksByAuthor(String author);
-
-    List<Book2> getBooksByTitle(String title);
+    // للحصول على التواريخ المتاحة للنشر
 
 
-    List<Book2> getBooksByGenre(String genre);
 }

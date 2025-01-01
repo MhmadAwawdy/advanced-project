@@ -9,13 +9,13 @@ import java.time.Instant;
 public class Book {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // استخدام GenerationType.IDENTITY لقاعدة البيانات مع autoincrement
     private int id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "author")
+    @Column(name = "author", nullable = false)
     private String author;
 
     @Column(name = "type")
@@ -32,6 +32,9 @@ public class Book {
     @Column(name = "image")
     private byte[] image;
 
+    @Column(name = "imageUrl")
+    private String imageUrl; // رابط الصورة (URL)
+
     @Column(name = "createdAt", updatable = false)
     private Timestamp createdAt;
 
@@ -43,16 +46,16 @@ public class Book {
         createdAt = Timestamp.from(Instant.now());
         updatedAt = Timestamp.from(Instant.now());
         if (status == null) {
-            status = BookStatus.AVAILABLE;
+            status = BookStatus.AVAILABLE; // تعيين الحالة إلى AVAILABLE عند الإنشاء إذا لم تكن محددة
         }
     }
 
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = Timestamp.from(Instant.now());
+        updatedAt = Timestamp.from(Instant.now()); // تعيين الوقت عند التحديث
     }
 
-
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -109,6 +112,14 @@ public class Book {
         this.image = image;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }
@@ -124,4 +135,12 @@ public class Book {
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    // الطريقة المطلوبة لإرجاع البيانات الثنائية (byte[]) الخاصة بالصورة
+    public byte[] getImageData() {
+        return image; // هذه هي الطريقة التي ترجِع صورة الكتاب كـ byte[]
+    }
+
+
+
 }

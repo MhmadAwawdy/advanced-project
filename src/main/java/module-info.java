@@ -20,17 +20,13 @@ module com.example.librarysystem {
     requires java.naming;
     requires java.persistence;
     requires mysql.connector.java;
+    requires java.sql.rowset;
 
+    exports librarysystem.models;
 
-
-
-
-
-
-
-
+    exports librarysystem.controllers.GuestPage to javafx.fxml;
     opens librarysystem.models to org.hibernate.orm.core;
-
+    opens librarysystem.controllers.GuestPage to javafx.fxml;
     opens librarysystem.app to javafx.fxml;
     exports librarysystem.app;
 
