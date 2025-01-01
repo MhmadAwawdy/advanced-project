@@ -27,10 +27,18 @@ public class Librarian {
     private Date date;
 
     //admin update
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     private String role;
 
-
+    @PrePersist
+    public void setDefaultsRole()
+    {
+        if (role == null)
+        {
+            this.role = "librarian";
+        }
+    }
+    
     public int getId() {
         return id;
     }
