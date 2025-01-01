@@ -156,6 +156,7 @@ public class AddNewLibrarianOrStudentController implements Initializable {
             user.setUsername(signup_username.getText());
             user.setPhoneNumber(signup_phone.getText());
             user.setPassword(PasswordEncryption.hashPassword(signup_password.getText()));
+            user.setRole("Librarian");
             user.setDate(new java.sql.Date(System.currentTimeMillis()));
 
             librarianDAOimp.save(user);
