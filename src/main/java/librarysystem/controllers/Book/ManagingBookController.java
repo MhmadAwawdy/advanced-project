@@ -282,7 +282,7 @@ public class ManagingBookController {
         if (valid) {
             try {
                 Book bookToUpdate = new Book();
-                bookToUpdate.setTitle(title); // سيتم التعرف على الكتاب بناءً على العنوان
+                bookToUpdate.setTitle(title);
                 bookToUpdate.setAuthor(author);
                 bookToUpdate.setType(type);
                 bookToUpdate.setPublishDate(publishDate);
