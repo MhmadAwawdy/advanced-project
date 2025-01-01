@@ -52,6 +52,16 @@ public class ManagingBookController {
     private Label dateErrorText;
     @FXML
     private Label statusErrorText;
+    @FXML
+    private TextField book_tittle;
+    @FXML
+    private TextField author_name;
+    @FXML
+    private TextField book_type;
+    @FXML
+    private TextField puplication_date;
+    @FXML
+    private TextField book_status;
 
     private byte[] bookImage;
     private final BookDAOImp bookDAOImp = new BookDAOImp();
@@ -236,6 +246,56 @@ public class ManagingBookController {
                 currentStage.setTitle("Library Reservation System");
                 currentStage.show();
             } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    @FXML
+    private void onClickUpdateBook() {
+        String title = book_tittle.getText().trim();
+        String author = author_name.getText().trim();
+        String type = book_type.getText().trim();
+        String publishDateStr = puplication_date.getText().trim();
+        String statusStr = book_status.getText().trim().toUpperCase();
+
+        boolean valid = true;
+
+        if (title.isEmpty() || author.isEmpty() || type.isEmpty() || publishDateStr.isEmpty() || statusStr.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Input Error", "All fields are required.");
+            valid = false;
+        }
+
+        int publishDate = 0;
+        if (valid) {
+            try {
+                publishDate = Integer.parseInt(publishDateStr);
+                if (publishDate < 1000 || publishDate > 9999) {
+                    showAlert(Alert.AlertType.ERROR, "Invalid Year", "Please enter a valid year.");
+                    valid = false;
+                }
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Year", "Please enter a valid year.");
+                valid = false;
+            }
+        }
+
+        if (valid) {
+            try {
+                Book bookToUpdate = new Book();
+                bookToUpdate.setTitle(title); // سيتم التعرف على الكتاب بناءً على العنوان
+                bookToUpdate.setAuthor(author);
+                bookToUpdate.setType(type);
+                bookToUpdate.setPublishDate(publishDate);
+                bookToUpdate.setStatus(BookStatus.valueOf(statusStr));
+
+                boolean isUpdated = bookDAOImp.update(bookToUpdate);
+                if (isUpdated) {
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Book updated successfully!");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to update the book.");
+                }
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "An error occurred: " + e.getMessage());
                 e.printStackTrace();
             }
         }
