@@ -14,7 +14,7 @@
    <children>
       <AnchorPane layoutX="-2.0" prefHeight="704.0" prefWidth="589.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="348.0" layoutX="351.0" layoutY="108.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="4.0" width="230.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="467.0" layoutX="351.0" layoutY="108.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="4.0" width="230.0" />
             <Text layoutX="8.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Details Page">
                <font>
                   <Font name="Avenir Black" size="33.0" />
@@ -24,7 +24,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="108.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="210.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="313.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="406.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="420.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
 
             <!-- Add Labels for bookTitleLabel, authorLabel, publishDateLabel, statusLabel -->
             <Label fx:id="bookTitleLabel" layoutX="19.0" layoutY="117.0" prefHeight="31.0" prefWidth="140.0" text="Book Title:">
@@ -42,7 +42,7 @@
                   <Font name="Apple SD Gothic Neo Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="statusLabel" layoutX="21.0" layoutY="418.0" text="Publication date:">
+            <Label fx:id="statusLabel" layoutX="21.0" layoutY="432.0" text="Publication date:">
                <font>
                   <Font name="Apple SD Gothic Neo Bold" size="20.0" />
                </font>
@@ -51,7 +51,7 @@
             <Separator layoutX="337.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="704.0" prefWidth="24.0" />
 
             <!-- Add ImageView for bookImageView -->
-            <ImageView fx:id="bookImageView" fitHeight="342.0" fitWidth="222.0" layoutX="356.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="bookImageView" fitHeight="460.0" fitWidth="222.0" layoutX="356.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
 
             <Button layoutX="361.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="39.0" prefWidth="154.0" style="-fx-background-color: #dca942;" text="Return Back">
                <font>
@@ -67,6 +67,12 @@
                   <Image url="@../../Photos/pngtree-design-return-arrow-png-image_13159428.png" />
                </image>
             </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="522.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
+            <Label fx:id="statusLabel1" layoutX="28.0" layoutY="534.0" text="Status:">
+               <font>
+                  <Font name="Apple SD Gothic Neo Bold" size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

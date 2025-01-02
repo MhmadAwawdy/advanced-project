@@ -22,7 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonType;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.application.Platform;
 
 public class GuestPageController {
 
@@ -65,10 +65,28 @@ public class GuestPageController {
 
     @FXML
     private void initialize() {
+
         filterTitleComboBox.getItems().addAll("image process", "Digital image processing", "wwww", "Book cover");
         filterAuthorComboBox.getItems().addAll("Malak", "Mikel", "Jemmy");
         filterDateComboBox.getItems().addAll("2022", "2024", "2010", "2019", "2013");
-        loadBooks();
+
+
+        Platform.runLater(this::loadInitialBooks);
+    }
+
+    private void loadInitialBooks() {
+        try {
+
+            List<Book> books = bookService.getAllBooks();
+            if (books != null && !books.isEmpty()) {
+                displayBooks(books);
+            } else {
+                showAlert("No Books", "No books with images are available.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Could not load initial books: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -172,38 +190,45 @@ public class GuestPageController {
     @FXML
     private void setOnClickAction(ImageView imageView, Book book) {
         imageView.setOnMouseClicked(event -> {
-            openBookDetailsPage(book);
+            try {
+                openBookDetailsPage(book);
+            } catch (Exception e) {
+                showAlert("Error", "Could not open book details: " + e.getMessage());
+                e.printStackTrace();
+            }
         });
     }
 
     @FXML
     private void openBookDetailsPage(Book book) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/librarysystem/views/BookDetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuestPage/BookDetails.fxml"));
             Parent root = loader.load();
 
-
-            String publishDateString = String.valueOf(book.getPublishDate());
-
-
-            String status = book.getStatus().toString();
-
-
             BookDetailsController bookDetailsController = loader.getController();
+
+
+            Image bookImage = bookService.getImageByBookTitle(book.getTitle());
+
+
             bookDetailsController.setBookDetails(
                     book.getTitle(),
                     book.getAuthor(),
-                    publishDateString,
+                    String.valueOf(book.getPublishDate()),
                     book.getType(),
-                    status,
-                    bookService.getImageByBookTitle(book.getTitle())
+                    book.getStatus().toString(),
+                    bookImage
             );
 
+
             Stage stage = new Stage();
-            stage.setTitle("Book Details");
-            stage.setScene(new Scene(root));
+            stage.setTitle("Book Details - " + book.getTitle());
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
+
         } catch (IOException e) {
+            showAlert("Error", "Could not open book details: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -239,17 +264,14 @@ public class GuestPageController {
 
     @FXML
     public void handleMouseEnter(MouseEvent mouseEvent) {
-
     }
 
     @FXML
     public void handleImageClick(MouseEvent mouseEvent) {
-
     }
 
     @FXML
     public void handleMouseExit(MouseEvent mouseEvent) {
-
     }
 
     private void showAlert(String title, String message) {
@@ -261,17 +283,10 @@ public class GuestPageController {
     @FXML
     private void handleReload(ActionEvent event) {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuestPage/GuestPage.fxml"));
             Parent root = loader.load();
-
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-
             Scene newScene = new Scene(root);
-
-
             stage.setScene(newScene);
             stage.show();
             System.out.println("The reload button has been pressed!");
