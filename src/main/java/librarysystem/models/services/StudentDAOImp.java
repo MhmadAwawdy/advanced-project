@@ -1,94 +1,71 @@
 package librarysystem.models.services;
 
-
 import librarysystem.models.Student;
 import librarysystem.models.interfaces.StudentDAO;
 import librarysystem.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import java.util.List;
 
 public class StudentDAOImp implements StudentDAO {
 
-    private HibernateUtil hibernateUtil;
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
-    public  StudentDAOImp()
-    {
-        hibernateUtil = HibernateUtil.getInstance();
-        sessionFactory = hibernateUtil.getSessionFactory();
+    public StudentDAOImp() {
+        this.sessionFactory = HibernateUtil.getInstance().getSessionFactory();
     }
 
     @Override
-    public void save(Student student)
-    {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = null;
-        try
-        {
-            transaction = session.beginTransaction();
+    public void save(Student student) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             session.save(student);
-            transaction.commit();
-        }
-        catch (Exception e)
-        {
-            if (transaction != null)
-            {
-                transaction.rollback();
-                e.printStackTrace();
-            }
-            throw new RuntimeException("Error saving librarian", e);
-        }
-        finally
-        {
-            session.close();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving student", e);
         }
     }
+
     @Override
     public Student findByPhone(String phone) {
-        Session session = sessionFactory.openSession();
-        try {
+        try (Session session = sessionFactory.openSession()) {
             String hql = "FROM Student WHERE studentPhone = :phone";
             Query<Student> query = session.createQuery(hql, Student.class);
             query.setParameter("phone", phone);
             return query.uniqueResult();
-        }
-        catch (Exception e) {
-            throw new RuntimeException("Error fetching user by username", e);
-        } finally {
-            session.close();
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching student by phone", e);
         }
     }
-    @Override
-    public List<Student> searchStudentsByName(String name) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Student> students = null;
 
-        try {
-            String hql = "FROM Student WHERE name LIKE :name";
+    @Override
+    public List<Student> getAllStudents() {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Student"; // Select all students
+            Query<Student> query = session.createQuery(hql, Student.class);
+            return query.list();
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching all students", e);
+        }
+    }
+
+    public List<Student> searchStudentsByName(String name) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Student WHERE studentName LIKE :name";
             Query<Student> query = session.createQuery(hql, Student.class);
             query.setParameter("name", "%" + name + "%");
-            students = query.list();
+            return query.list();
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return students;
-    }
-    public List<Student> getFirstTenStudents() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "FROM Student";
-            return session.createQuery(hql, Student.class)
-                    .setMaxResults(10) // Limit results to the first 10
-                    .getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return List.of(); // Return an empty list in case of an error
+            throw new RuntimeException("Error searching students by name", e);
         }
     }
-}
 
+
+}

@@ -20,7 +20,7 @@ module com.example.librarysystem {
     requires java.naming;
     requires java.persistence;
     requires mysql.connector.java;
-
+    requires org.slf4j;
 
 
     opens librarysystem.models to org.hibernate.orm.core;

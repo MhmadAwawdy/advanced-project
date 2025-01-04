@@ -3,12 +3,17 @@ package librarysystem.utils;
 import librarysystem.models.Book;
 import librarysystem.models.Librarian;
 import librarysystem.models.Student;
+import librarysystem.models.Reservation;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HibernateUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
 
     private static HibernateUtil instance = null;
 
@@ -17,28 +22,29 @@ public class HibernateUtil {
 
     private HibernateUtil() {
         try {
-            System.out.println("Initializing HibernateUtil...");
+            logger.info("Initializing HibernateUtil...");
 
             Configuration configuration = new Configuration();
-            System.out.println("Loading annotated class...");
+            logger.info("Loading annotated classes...");
             configuration.addAnnotatedClass(Librarian.class);
             configuration.addAnnotatedClass(Book.class);
             configuration.addAnnotatedClass(Student.class);
+            configuration.addAnnotatedClass(Reservation.class); // Add the missing entity here
 
-            System.out.println("Loading configuration file...");
+            logger.info("Loading configuration file...");
             configuration.configure("hibernate.cfg.xml");
 
-            System.out.println("Building service registry...");
+            logger.info("Building service registry...");
             serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties())
                     .build();
 
-            System.out.println("Building session factory...");
+            logger.info("Building session factory...");
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
-            System.out.println("HibernateUtil initialized successfully!");
+            logger.info("HibernateUtil initialized successfully!");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error initializing HibernateUtil", e);
             throw new RuntimeException("Error initializing HibernateUtil: " + e.getMessage());
         }
     }
@@ -52,5 +58,12 @@ public class HibernateUtil {
 
     public synchronized static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public static void shutdown() {
+        if (serviceRegistry != null) {
+            StandardServiceRegistryBuilder.destroy(serviceRegistry);
+            logger.info("Service registry destroyed.");
+        }
     }
 }

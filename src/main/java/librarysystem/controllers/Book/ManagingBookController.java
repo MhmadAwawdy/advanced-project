@@ -166,8 +166,32 @@ public class ManagingBookController {
                 newBook.setAuthor(author);
                 newBook.setType(type);
                 newBook.setPublishDate(publishDate);
-                newBook.setStatus(BookStatus.valueOf(statusStr));
+
+// Set the status using the BookStatus enum
+                BookStatus bookStatus = null;
+                if (statusStr != null) {
+                    switch (statusStr.toUpperCase()) {
+                        case "AVAILABLE":
+                            bookStatus = BookStatus.available;
+                            break;
+                        case "RESERVED":
+                            bookStatus = BookStatus.reserved;
+                            break;
+                        default:
+                            System.err.println("Invalid status: " + statusStr);
+                            bookStatus = BookStatus.available; // Default to AVAILABLE
+                            break;
+                    }
+                }
+
+                // Assuming statusStr is a String you are getting from somewhere
+                // Assuming statusStr is the string value that represents the status
+                Book.BookStatus status = Book.BookStatus.valueOf(statusStr); // Converts statusStr to BookStatus enum value
+                newBook.setStatus(status); // Sets the status of the new book
+
+
                 newBook.setImage(bookImage);
+
 
                 try {
                     bookDAOImp.save(newBook);

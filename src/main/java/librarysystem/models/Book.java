@@ -24,9 +24,14 @@ public class Book {
     @Column(name = "publishDate")
     private int publishDate;
 
+    public enum BookStatus {
+        available, reserved
+    }
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private BookStatus status;
+
+
 
     @Lob
     @Column(name = "image")
@@ -43,7 +48,7 @@ public class Book {
         createdAt = Timestamp.from(Instant.now());
         updatedAt = Timestamp.from(Instant.now());
         if (status == null) {
-            status = BookStatus.AVAILABLE;
+            status = BookStatus.available;
         }
     }
 
@@ -93,12 +98,12 @@ public class Book {
         this.publishDate = publishDate;
     }
 
-    public BookStatus getStatus() {
-        return status;
-    }
-
     public void setStatus(BookStatus status) {
         this.status = status;
+    }
+
+    public BookStatus getStatus() {
+        return status;
     }
 
     public byte[] getImage() {
