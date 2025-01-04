@@ -85,4 +85,29 @@ public class BookDAOImp implements BookDAO {
             throw new RuntimeException("Failed to search books", e);
         }
     }
+    public boolean update(Book book) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+
+            String hql = "UPDATE Book SET author = :author, type = :type, publishDate = :publishDate, status = :status WHERE title = :title";
+            Query query = session.createQuery(hql);
+            query.setParameter("title", book.getTitle());
+            query.setParameter("author", book.getAuthor());
+            query.setParameter("type", book.getType());
+            query.setParameter("publishDate", book.getPublishDate());
+            query.setParameter("status", book.getStatus());
+
+            int result = query.executeUpdate();
+            transaction.commit();
+            return result > 0;
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

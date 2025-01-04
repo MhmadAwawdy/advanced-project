@@ -9,13 +9,13 @@ import java.time.Instant;
 public class Book {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "author")
+    @Column(name = "author", nullable = false)
     private String author;
 
     @Column(name = "type")
@@ -24,18 +24,23 @@ public class Book {
     @Column(name = "publishDate")
     private int publishDate;
 
-    public enum BookStatus {
-        available, reserved
-    }
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private BookStatus status;
 
+    public enum BookStatus
+    {
+        available, reserved
+    }
 
 
     @Lob
     @Column(name = "image")
     private byte[] image;
+
+    @Column(name = "imageUrl")
+    private String imageUrl;
 
     @Column(name = "createdAt", updatable = false)
     private Timestamp createdAt;
@@ -114,6 +119,15 @@ public class Book {
         this.image = image;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }
@@ -128,5 +142,9 @@ public class Book {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public byte[] getImageData() {
+        return image;
     }
 }
