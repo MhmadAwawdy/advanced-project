@@ -59,7 +59,7 @@
             <Image url="@../../Image/mikkawe/details.png" />
         </ImageView>
         <ImageView fx:id="bookImageView" fitHeight="324.0" fitWidth="248.0" layoutX="676.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
-            
+
         </ImageView>
         <Button fx:id="BackToHome" layoutX="27.0" layoutY="17.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
             <font>
@@ -85,7 +85,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="152.0" layoutY="671.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="157.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Delete book" textFill="WHITE">
+        <Button layoutX="152.0" layoutY="671.0" mnemonicParsing="false" onAction="#deleteBook" prefHeight="40.0" prefWidth="157.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Delete book" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>

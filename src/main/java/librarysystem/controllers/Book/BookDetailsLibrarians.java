@@ -15,7 +15,8 @@ import librarysystem.controllers.Reservation.SubmitReservationController;
 import librarysystem.models.Book;
 import librarysystem.utils.HibernateUtil;
 import org.hibernate.Session;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import java.io.ByteArrayInputStream;
 import java.util.Objects;
 
@@ -157,7 +158,6 @@ public class BookDetailsLibrarians {
 
     private void loadNewScene(String fxmlPath, String title) {
         try {
-            // Load the new scene
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
             Stage currentStage = (Stage) BackToHome.getScene().getWindow();
             Scene scene = new Scene(root);
@@ -168,6 +168,45 @@ public class BookDetailsLibrarians {
             e.printStackTrace();
         }
     }
+
+
+    public void deleteBook(ActionEvent actionEvent) {
+
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirm Delete");
+        confirmationAlert.setHeaderText("Are you sure you want to delete this book?");
+        confirmationAlert.setContentText("This action cannot be undone.");
+        ButtonType result = confirmationAlert.showAndWait().orElse(ButtonType.CANCEL);
+
+        if (result == ButtonType.OK) {
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                session.beginTransaction();
+                Book bookToDelete = session.get(Book.class, BookId);
+
+                if (bookToDelete != null) {
+                    session.delete(bookToDelete);
+                    session.getTransaction().commit();
+                    System.out.println("Book deleted successfully");
+
+                    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml")));
+                    Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    currentStage.setScene(scene);
+                    currentStage.setTitle("Library Reservation System");
+                    currentStage.show();
+                } else {
+                    System.err.println("Book not found for deletion.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Error occurred while deleting the book.");
+            }
+        } else {
+            System.out.println("Book deletion cancelled by the user.");
+        }
+    }
+
+
 
 
 }
