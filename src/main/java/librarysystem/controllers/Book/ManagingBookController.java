@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import librarysystem.models.Book;
-import librarysystem.models.BookStatus;
+import librarysystem.models.Book.BookStatus;
 import librarysystem.models.services.BookDAOImp;
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,6 +52,16 @@ public class ManagingBookController {
     private Label dateErrorText;
     @FXML
     private Label statusErrorText;
+    @FXML
+    private TextField book_tittle;
+    @FXML
+    private TextField author_name;
+    @FXML
+    private TextField book_type;
+    @FXML
+    private TextField puplication_date;
+    @FXML
+    private TextField book_status;
 
     private byte[] bookImage;
     private final BookDAOImp bookDAOImp = new BookDAOImp();
@@ -167,8 +177,8 @@ public class ManagingBookController {
                 newBook.setType(type);
                 newBook.setPublishDate(publishDate);
 
-// Set the status using the BookStatus enum
-                BookStatus bookStatus = null;
+                // Set the status using the BookStatus enum
+                BookStatus bookStatus = BookStatus.available; // Default to AVAILABLE
                 if (statusStr != null) {
                     switch (statusStr.toUpperCase()) {
                         case "AVAILABLE":
@@ -179,19 +189,12 @@ public class ManagingBookController {
                             break;
                         default:
                             System.err.println("Invalid status: " + statusStr);
-                            bookStatus = BookStatus.available; // Default to AVAILABLE
                             break;
                     }
                 }
-
-                // Assuming statusStr is a String you are getting from somewhere
-                // Assuming statusStr is the string value that represents the status
-                Book.BookStatus status = Book.BookStatus.valueOf(statusStr); // Converts statusStr to BookStatus enum value
-                newBook.setStatus(status); // Sets the status of the new book
-
+                newBook.setStatus(bookStatus); // Set the status of the new book
 
                 newBook.setImage(bookImage);
-
 
                 try {
                     bookDAOImp.save(newBook);
@@ -263,5 +266,63 @@ public class ManagingBookController {
                 e.printStackTrace();
             }
         }
+    }
+    @FXML
+    private void onClickUpdateBook() {
+        String title = book_tittle.getText().trim();
+        String author = author_name.getText().trim();
+        String type = book_type.getText().trim();
+        String publishDateStr = puplication_date.getText().trim();
+        String statusStr = book_status.getText().trim().toUpperCase();
+
+        boolean valid = true;
+
+        if (title.isEmpty() || author.isEmpty() || type.isEmpty() || publishDateStr.isEmpty() || statusStr.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Input Error", "All fields are required.");
+            valid = false;
+        }
+
+        int publishDate = 0;
+        if (valid) {
+            try {
+                publishDate = Integer.parseInt(publishDateStr);
+                if (publishDate < 1000 || publishDate > 9999) {
+                    showAlert(Alert.AlertType.ERROR, "Invalid Year", "Please enter a valid year.");
+                    valid = false;
+                }
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Year", "Please enter a valid year.");
+                valid = false;
+            }
+        }
+
+        if (valid) {
+            try {
+                Book bookToUpdate = new Book();
+                bookToUpdate.setTitle(title);
+                bookToUpdate.setAuthor(author);
+                bookToUpdate.setType(type);
+                bookToUpdate.setPublishDate(publishDate);
+                //bookToUpdate.setStatus(BookStatus.valueOf(statusStr));
+
+                boolean isUpdated = bookDAOImp.update(bookToUpdate);
+                if (isUpdated) {
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Book updated successfully!");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to update the book.");
+                }
+                clearFieldsUpdateBook();
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "An error occurred: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
+    private void clearFieldsUpdateBook() {
+        book_tittle.clear();
+        author_name.clear();
+        book_type.clear();
+        puplication_date.clear();
+        book_status.clear();
     }
 }

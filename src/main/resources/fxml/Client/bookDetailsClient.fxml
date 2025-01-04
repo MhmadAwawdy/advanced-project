@@ -3,65 +3,86 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
-            prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="librarysystem.controllers.Client.BookDetailsClientController">
-    <Label layoutX="349.0" layoutY="59.0" text="Edit book details page ">
-        <font>
-            <Font name="System Bold" size="28.0"/>
-        </font>
-    </Label>
-    <ImageView fitHeight="416.0" fitWidth="278.0" layoutX="689.0" layoutY="190.0" pickOnBounds="true"
-               preserveRatio="true">
-        <Image url="@../../Image/bookImage.jpeg"/>
-    </ImageView>
-    <Label layoutX="301.0" layoutY="229.0" text="Book Title">
-        <font>
-            <Font name="System Bold" size="20.0"/>
-        </font>
-    </Label>
-    <Label layoutX="285.0" layoutY="296.0" text="Author Name">
-        <font>
-            <Font name="System Bold" size="20.0"/>
-        </font>
-    </Label>
-    <Label layoutX="299.0" layoutY="360.0" text="Book Type">
-        <font>
-            <Font name="System Bold" size="20.0"/>
-        </font>
-    </Label>
-    <Label layoutX="271.0" layoutY="421.0" text="Publication Date">
-        <font>
-            <Font name="System Bold" size="20.0"/>
-        </font>
-    </Label>
-    <Label layoutX="293.0" layoutY="489.0" text="Book Status">
-        <font>
-            <Font name="System Bold" size="20.0"/>
-        </font>
-    </Label>
-    <Button fx:id="ReservationRequest" layoutX="414.0" layoutY="636.0" mnemonicParsing="false" onAction="#goForward"
-            prefHeight="40.0" prefWidth="172.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;"
-            text="Reservation request" textFill="WHITE">
-        <font>
-            <Font name="System Bold" size="16.0"/>
-        </font>
-        <cursor>
-            <Cursor fx:constant="HAND"/>
-        </cursor>
-    </Button>
-    <Button layoutX="50.0" layoutY="64.0" mnemonicParsing="false" onAction="#backHome" prefHeight="30.0"
-            prefWidth="60.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Back">
-        <font>
-            <Font name="System Bold" size="14.0"/>
-        </font>
-        <cursor>
-            <Cursor fx:constant="HAND"/>
-        </cursor>
-    </Button>
+<AnchorPane prefHeight="660.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarysystem.controllers.Client.BookDetailsClientController">
+    <children>
+        <AnchorPane layoutX="-2.0" prefHeight="704.0" prefWidth="589.0">
+            <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="467.0" layoutX="351.0" layoutY="108.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="4.0" width="230.0" />
+                <Text layoutX="8.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Details Page">
+                    <font>
+                        <Font name="Avenir Black" size="33.0" />
+                    </font>
+                </Text>
+                <Separator layoutX="1.0" layoutY="72.0" prefHeight="10.0" prefWidth="588.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="108.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="210.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="313.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="420.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
+
+                <!-- Add Labels for bookTitleLabel, authorLabel, publishDateLabel, statusLabel -->
+                <Label fx:id="bookTitleLabel" layoutX="19.0" layoutY="117.0" prefHeight="31.0" prefWidth="140.0" text="Book Title:">
+                    <font>
+                        <Font name="Apple SD Gothic Neo Bold" size="20.0" />
+                    </font>
+                </Label>
+                <Label fx:id="authorLabel" layoutX="19.0" layoutY="219.0" prefHeight="31.0" prefWidth="154.0" text="Author Name:">
+                    <font>
+                        <Font name="Apple SD Gothic Neo Bold" size="20.0" />
+                    </font>
+                </Label>
+                <Label fx:id="publishDateLabel" layoutX="21.0" layoutY="325.0" text="Book Type:">
+                    <font>
+                        <Font name="Apple SD Gothic Neo Bold" size="20.0" />
+                    </font>
+                </Label>
+                <Label fx:id="statusLabel" layoutX="21.0" layoutY="432.0" text="Publication date:">
+                    <font>
+                        <Font name="Apple SD Gothic Neo Bold" size="20.0" />
+                    </font>
+                </Label>
+
+                <Separator layoutX="337.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="704.0" prefWidth="24.0" />
+
+                <!-- Add ImageView for bookImageView -->
+                <ImageView fx:id="bookImageView" fitHeight="460.0" fitWidth="222.0" layoutX="356.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
+
+                <Button layoutX="361.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="39.0" prefWidth="154.0" style="-fx-background-color: #dca942;" text="Return Back">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Button>
+                <ImageView fitHeight="49.0" fitWidth="45.0" layoutX="295.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../Image/mikkawe/details.png" />
+                    </image></ImageView>
+                <ImageView fitHeight="58.0" fitWidth="61.0" layoutX="515.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../Image/mikkawe/pngtree-design-return-arrow-png-image_13159428.png" />
+                    </image>
+                </ImageView>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="14.0" layoutY="522.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="329.0" />
+                <Label fx:id="statusLabel1" layoutX="28.0" layoutY="534.0" text="Status:">
+                    <font>
+                        <Font name="Apple SD Gothic Neo Bold" size="20.0" />
+                    </font>
+                </Label>
+            <Button fx:id="ReservationRequest" layoutX="202.0" layoutY="620.0" mnemonicParsing="false" onAction="#goForward" prefHeight="40.0" prefWidth="172.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Reservation request" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>
