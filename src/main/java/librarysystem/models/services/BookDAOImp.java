@@ -57,19 +57,24 @@ public class BookDAOImp implements BookDAO {
         }
     }
 
-
-
-
-        public boolean isBookExists(String title, String author) {
-        try (Session session = sessionFactory.openSession()) {
+    public boolean isBookExists(String title, String author) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
             String hql = "FROM Book WHERE title = :title AND author = :author";
             Query<Book> query = session.createQuery(hql, Book.class);
             query.setParameter("title", title);
             query.setParameter("author", author);
 
-            return query.uniqueResult() != null;
+            Book result = query.uniqueResult();
+            return result != null;
+
         } catch (Exception e) {
-            throw new RuntimeException("Failed to check if book exists", e);
+            throw new RuntimeException("Failed to check if book exists: " + e.getMessage(), e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
