@@ -9,10 +9,14 @@
         <property name="hibernate.connection.url">jdbc:mysql://108.181.157.249:10055/librarysystem</property>
         <property name="hibernate.connection.username">admin</property>
         <property name="hibernate.connection.password">JngGL3fp</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.id.new_generator_mappings">false</property>
+        <mapping class="librarysystem.models.Reservation"/>
+        <mapping class="librarysystem.models.Student"/>
+
+
 
     </session-factory>
 </hibernate-configuration>

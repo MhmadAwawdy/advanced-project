@@ -12,68 +12,77 @@ import java.util.List;
 
 public class BookDAOImp implements BookDAO {
 
-    private HibernateUtil hibernateUtil;
-    private SessionFactory sessionFactory;
-
-    public BookDAOImp() {
-        hibernateUtil = HibernateUtil.getInstance();
-        sessionFactory = hibernateUtil.getSessionFactory();
+    @Override
+    public Book getBookByName(String name) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            String hql = "FROM Book WHERE title = :name";
+            Query<Book> query = session.createQuery(hql, Book.class);
+            query.setParameter("name", name);
+            return query.uniqueResult(); // Return the book if found, otherwise null
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch the book by name: " + e.getMessage(), e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
+    private final SessionFactory sessionFactory;
 
+    public BookDAOImp() {
+        HibernateUtil hibernateUtil = HibernateUtil.getInstance();
+        this.sessionFactory = hibernateUtil.getSessionFactory();
+    }
+
+    @Override
     public void save(Book book) {
-        Session session = sessionFactory.openSession();
         Transaction transaction = null;
-
-        try {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            session.save(book);
+            System.out.println("Status: " + book.getStatus());
+
+
+            session.update(book);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException("Failed to save the book", e);
-        } finally {
-            session.close();
         }
     }
 
-    public boolean isBookExists(String title, String author) {
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
+
+
+
+        public boolean isBookExists(String title, String author) {
+        try (Session session = sessionFactory.openSession()) {
             String hql = "FROM Book WHERE title = :title AND author = :author";
             Query<Book> query = session.createQuery(hql, Book.class);
             query.setParameter("title", title);
             query.setParameter("author", author);
 
-            Book result = query.uniqueResult();
-            return result != null;
-
+            return query.uniqueResult() != null;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to check if book exists: " + e.getMessage(), e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new RuntimeException("Failed to check if book exists", e);
         }
     }
+
+    @Override
     public List<Book> searchBooks(String keyword) {
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
+        try (Session session = sessionFactory.openSession()) {
             String hql = "FROM Book WHERE title LIKE :keyword OR author LIKE :keyword";
             Query<Book> query = session.createQuery(hql, Book.class);
             query.setParameter("keyword", "%" + keyword + "%");
+
             return query.list();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to search books: " + e.getMessage(), e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new RuntimeException("Failed to search books", e);
         }
     }
-
 }

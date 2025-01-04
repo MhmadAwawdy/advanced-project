@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarysystem.controllers.Reservation.ExtendedReservationController">
+    <Label layoutX="347.0" layoutY="58.0" style="-fx-background-color: #ffffff;" text="Extend Reservation Due Date">
+        <font>
+            <Font name="System Bold" size="28.0" />
+        </font>
+    </Label>
+
+    <!-- Label for Due Date Picker -->
+    <Label layoutX="213.0" layoutY="561.0" style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Select New Due Date:" />
+
+    <!-- Due Date Picker -->
+    <DatePicker fx:id="dueDatePicker" layoutX="367.0" layoutY="548.0" prefHeight="46.0" prefWidth="384.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #DCA942; -fx-border-width: 3; -fx-background-radius: 50; -fx-border-radius: 50;" />
+
+    <ListView fx:id="reservedBooksListView" layoutX="181.0" layoutY="122.0" prefHeight="379.0" prefWidth="716.0" style="-fx-background-color: #FBF3DB; -fx-border-color: #DCA942; -fx-border-width: 3;" />
+
+    <Button fx:id="extendButton" disable="true" layoutX="441.0" layoutY="658.0" mnemonicParsing="false" onAction="#extendReservation" prefHeight="45.0" prefWidth="117.0" style="-fx-background-radius: 20; -fx-background-color: #DCA942;" text="Extend">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Button>
+
+    <Button layoutX="44.0" layoutY="65.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+        <cursor>
+            <Cursor fx:constant="HAND" />
+        </cursor>
+    </Button>
+</AnchorPane>

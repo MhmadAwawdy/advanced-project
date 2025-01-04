@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000" style="-fx-background-color: white;"
+<AnchorPane  prefHeight="750.0" prefWidth="1000" style="-fx-background-color: white;"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="librarysystem.controllers.HomePage.HomePageLibrariansController">
 
@@ -110,17 +110,21 @@
                 </opaqueInsets>
             </Label>
             <HBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="165.0" spacing="10">
-                <ImageView fitHeight="80" fitWidth="58.0">
-                    <Image url="@../../Image/book1.jpg"/>
+                <ImageView fx:id="bookImageView" fitHeight="80.0" fitWidth="58.0" preserveRatio="true">
+                    <image>
+
+                    </image>
                     <HBox.margin>
                         <Insets top="10.0"/>
                     </HBox.margin>
                 </ImageView>
-                <Label text="Book name">
+
+                <Label fx:id="firstBookName" alignment="CENTER_LEFT" style="-fx-font-size: 14px; -fx-font-weight: bold;">
                     <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="20.0" top="30.0"/>
                     </HBox.margin>
                 </Label>
+
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="165.0" spacing="10">
                 <ImageView fitHeight="80" fitWidth="62.0">
