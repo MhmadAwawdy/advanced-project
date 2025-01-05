@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import librarysystem.controllers.HomePage.HomePageLibrariansController;
 import librarysystem.models.Reservation;
 import librarysystem.models.interfaces.ReservationDAO;
 import librarysystem.models.services.ReservationDAOImp;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ExtendedReservationController {
 
@@ -35,9 +37,25 @@ public class ExtendedReservationController {
 
     private final ReservationDAO reservationDAO = new ReservationDAOImp();
 
+    private static int bookId;  // Store the BookId
+
+    public void setBookid() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml"));
+        Parent root = loader.load();
+        HomePageLibrariansController controller = loader.getController();
+
+        bookId = controller.Bookid;
+        System.out.println("Book Id set: " + bookId);
+    }
+
+
+
+
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         // Load reserved books when the page is initialized
+        setBookid();
         loadReservedBooks();
 
         // Disable the extend button by default
@@ -51,28 +69,33 @@ public class ExtendedReservationController {
 
     private void loadReservedBooks() {
         try {
-            List<Reservation> reservedBooks = reservationDAO.getReservedBooks();
-            ObservableList<Reservation> items = FXCollections.observableArrayList(reservedBooks);
+            // Fetch all reserved books (no filtering by BookId here)
+            List<Reservation> allReservedBooks = reservationDAO.getReservedBooks();
+
+            // Filter reservations by BookId using Streams
+            List<Reservation> filteredReservedBooks = allReservedBooks.stream()
+                    .filter(reservation -> reservation.getBookId() == bookId)
+                    .collect(Collectors.toList());
+
+            // Create ObservableList from filtered results
+            ObservableList<Reservation> items = FXCollections.observableArrayList(filteredReservedBooks);
 
             reservedBooksListView.setItems(items);
-            reservedBooksListView.setCellFactory(param -> new ListCell<>() {
+            reservedBooksListView.setCellFactory(param -> new ListCell<Reservation>() {
                 @Override
                 protected void updateItem(Reservation reservation, boolean empty) {
                     super.updateItem(reservation, empty);
                     if (empty || reservation == null) {
                         setText(null);
                     } else {
-                        setText(" Student Name: " + reservation.getStudentName() +
+                        setText("Student Name: " + reservation.getStudentName() +
                                 " // Status: " + reservation.getStatus() +
                                 " // Reservation Date: " + reservation.getReservationDate() +
                                 " // Due Date: " + reservation.getDueDate() +
                                 " // Book Name: " + reservation.getBookName() +
                                 " // Reservation ID: " + reservation.getReservationId() +
                                 " // Book ID: " + reservation.getBookId() +
-                                " // Student ID : " + reservation.getStudentId())
-                                ;
-
-
+                                " // Student ID : " + reservation.getStudentId());
                     }
                 }
             });

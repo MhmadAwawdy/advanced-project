@@ -11,12 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import librarysystem.controllers.HomePage.HomePageLibrariansController;
 import librarysystem.controllers.Reservation.SubmitReservationController;
 import librarysystem.models.Book;
 import librarysystem.utils.HibernateUtil;
 import org.hibernate.Session;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Objects;
 
 public class BookDetailsLibrarians {
@@ -46,18 +48,37 @@ public class BookDetailsLibrarians {
 
     String BookTitle;
 
-    int BookId;
+    private Book selectedBook;
+
+    private static int BookId;
 
     public void initialize() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             if (session != null) {
                 System.out.println("Database connected successfully.");
             }
-            loadBookDetails(17); // Test with a valid book ID
+            setBookid();
+            loadBookDetails(BookId); // Test with a valid book ID
         } catch (Exception e) {
             System.err.println("Error connecting to the database.");
             e.printStackTrace();
         }
+    }
+
+    public void setBook(Book book) {
+        this.selectedBook = book;
+
+        // Now you can use selectedBook to display book details in this controller
+        // For example, you can display the book title and image like this:
+        loadBookDetails(this.selectedBook.getId());
+    }
+    public void setBookid() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml"));
+        Parent root = loader.load();
+        HomePageLibrariansController controller = loader.getController();
+
+        BookId = controller.Bookid;
+        System.out.println("Book Id set: " + BookId);
     }
 
 

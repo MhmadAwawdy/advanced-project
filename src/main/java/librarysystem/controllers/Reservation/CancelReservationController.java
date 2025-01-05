@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import librarysystem.controllers.HomePage.HomePageLibrariansController;
 import librarysystem.models.Book;
 import librarysystem.models.Reservation;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import org.hibernate.Session;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CancelReservationController {
 
@@ -27,22 +29,55 @@ public class CancelReservationController {
 
     @FXML
     private ListView<Reservation> reservedBooksListView;
+    @FXML
+    private ListView<Reservation> rereservedBooksListView;
+
+    private static int bookId;  // Store the BookId
+
+    public void setBookid() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml"));
+        Parent root = loader.load();
+        HomePageLibrariansController controller = loader.getController();
+
+        bookId = controller.Bookid;
+        System.out.println("Book Id set: " + bookId);
+    }
 
     private final ReservationDAO reservationDAO = new ReservationDAOImp();
 
     // Method to load reserved books from the database
     public void loadReservedBooks() {
         try {
-            List<Reservation> reservedBooks = reservationDAO.getReservedBooks();
-            ObservableList<Reservation> items = FXCollections.observableArrayList(reservedBooks);
+            List<Reservation> allReservedBooks = reservationDAO.getReservedBooks();
+
+            // Filter the reservations by bookId
+            List<Reservation> filteredReservedBooks = allReservedBooks.stream()
+                    .filter(reservation -> reservation.getBookId() == bookId)
+                    .collect(Collectors.toList());
+
+            // Create an ObservableList from the filtered reservations
+            ObservableList<Reservation> items = FXCollections.observableArrayList(filteredReservedBooks);
+
+            // Set the items in the ListView
             reservedBooksListView.setItems(items);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadReservedBooks() {
+        try {
+            List<Reservation> reservedBooks = reservedBooksListView.getItems();
+            ObservableList<Reservation> items = FXCollections.observableArrayList(reservedBooks);
+            rereservedBooksListView.setItems(items);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
+        setBookid();
         // Step 1: Disable the cancel button initially
         cancelReservationButton.setDisable(true);
 
@@ -53,10 +88,19 @@ public class CancelReservationController {
 
         // Step 3: Load the reserved books into the ListView
         loadReservedBooks();
+        List<Reservation> allReservedBooks = reservationDAO.getReservedBooks();
 
+        // Filter reservations by BookId using Streams
+        List<Reservation> filteredReservedBooks = allReservedBooks.stream()
+                .filter(reservation -> reservation.getBookId() == bookId)
+                .collect(Collectors.toList());
+
+        // Create ObservableList from filtered results
+        ObservableList<Reservation> items = FXCollections.observableArrayList(filteredReservedBooks);
+
+        reservedBooksListView.setItems(items);
         // Optional: Customize how reservations are displayed in the ListView
-        reservedBooksListView.setCellFactory(param -> new ListCell<>() {
-            @Override
+        reservedBooksListView.setCellFactory(param -> new ListCell<Reservation>() {            @Override
             protected void updateItem(Reservation reservation, boolean empty) {
                 super.updateItem(reservation, empty);
                 if (empty || reservation == null) {
