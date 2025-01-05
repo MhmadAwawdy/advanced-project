@@ -305,7 +305,9 @@
     </ScrollPane>
 
 
-    <Button layoutX="157.0" layoutY="116.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Search" textFill="WHITE">
+    <Button fx:id="searchButton" layoutX="157.0" layoutY="116.0" mnemonicParsing="false"
+            prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;"
+            text="Search" textFill="WHITE" onAction="#handleSearch">
         <font>
             <Font name="System Bold" size="14.0" />
         </font>
@@ -313,5 +315,9 @@
             <Cursor fx:constant="HAND" />
         </cursor>
     </Button>
-    <TextField layoutX="278.0" layoutY="116.0" prefHeight="38.0" prefWidth="419.0" promptText="  Search book" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: #DCA942; -fx-border-radius: 10px;" />
+
+    <TextField fx:id="searchTextField" layoutX="278.0" layoutY="116.0" prefHeight="38.0" prefWidth="419.0"
+               promptText="  Search book"
+               style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: #DCA942; -fx-border-radius: 10px;" />
+
 </AnchorPane>

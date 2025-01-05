@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -58,7 +59,14 @@ public class HomePageLibrariansController {
     @FXML
     private GridPane reservationsGridPane;
     @FXML
-    private GridPane booksGridPane
+    private GridPane booksGridPane;
+    @FXML
+    private Button searchButton;
+
+    @FXML
+    private TextField searchTextField;
+
+
             ;
     public ImageView bookImageView1;
     public Label bookName1;
@@ -87,6 +95,90 @@ public class HomePageLibrariansController {
             e.printStackTrace();
         }
     }
+
+    // two function!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    @FXML
+    private void handleSearch() {
+        String searchQuery = searchTextField.getText().trim();
+
+        if (searchQuery.isEmpty()) {
+            // If the search field is cleared, reload the home page
+            loadBooks(); // Call your method to reload the home page
+            return;
+        }
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Query to fetch books matching the search query (case insensitive)
+            List<Book> books = session.createQuery(
+                            "FROM Book b WHERE lower(b.title) LIKE :searchQuery", Book.class)
+                    .setParameter("searchQuery", "%" + searchQuery.toLowerCase() + "%")
+                    .list();
+
+            // Display the search results
+            displaySearchResults(books);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displaySearchResults(List<Book> books) {
+        try {
+            adjustGridPaneHeight(); // Adjust the height dynamically if needed
+            booksGridPane.getChildren().clear(); // Clear previous results
+
+            if (books == null || books.isEmpty()) {
+                System.out.println("No books found matching the search query.");
+                return;
+            }
+
+            int row = 0;
+            int column = 0;
+
+            for (Book book : books) {
+                // Create a VBox for each book
+                VBox bookBox = new VBox(10); // Spacing between image and title
+                bookBox.setAlignment(Pos.CENTER);
+                bookBox.setStyle("-fx-padding: 10; -fx-border-color: #8B4513; -fx-border-width: 1; -fx-background-color: #FBF3DB;");
+
+                // Book image
+                ImageView bookImageView = new ImageView();
+                if (book.getImage() != null) {
+                    Image bookImage = new Image(new ByteArrayInputStream(book.getImage()));
+                    bookImageView.setImage(bookImage);
+                }
+                bookImageView.setUserData(book); // Store book data for click handling
+                bookImageView.setFitWidth(100);
+                bookImageView.setFitHeight(150);
+                bookImageView.setPreserveRatio(true);
+
+                // Add click and hover effects
+                bookImageView.setOnMouseClicked(event -> handleBookImageClick(event));
+                AddMouseEffect(bookImageView);
+
+                // Book title
+                Label bookTitleLabel = new Label(book.getTitle());
+                bookTitleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+                bookTitleLabel.setStyle("-fx-text-fill: #3b3b3b;");
+
+                // Add image and title to VBox
+                bookBox.getChildren().addAll(bookImageView, bookTitleLabel);
+
+                // Add the VBox to the GridPane
+                booksGridPane.add(bookBox, column, row);
+
+                column++; // Move to the next column
+                if (column == 2) { // If 2 books in a row, move to the next row
+                    column = 0;
+                    row++;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     @FXML
     private void openProfile() {
@@ -361,6 +453,8 @@ public class HomePageLibrariansController {
                         column = 0;
                         row++;
                     }
+
+
                 }
             } else {
                 System.err.println("GridPane is not initialized!");
@@ -448,8 +542,6 @@ public class HomePageLibrariansController {
             e.printStackTrace();
         }
     }
-
-
 
 }
 
