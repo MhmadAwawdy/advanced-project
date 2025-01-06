@@ -13,18 +13,17 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarysystem.controllers.Book.BookDetailsLibrarians">
     <AnchorPane layoutX="-2.0" prefHeight="750.0" prefWidth="1000.0">
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="335.0" layoutX="673.0" layoutY="131.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="4.0" width="240.0" />
         <Text fontSmoothingType="LCD" layoutX="409.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Details Page">
             <font>
                 <Font name="System Bold" size="28.0" />
             </font>
         </Text>
         <Separator layoutX="1.0" layoutY="52.0" prefHeight="22.0" prefWidth="1018.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="193.0" layoutY="177.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="193.0" layoutY="237.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="194.0" layoutY="296.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="193.0" layoutY="355.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="192.0" layoutY="414.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="294.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="193.0" layoutY="177.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="360.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="193.0" layoutY="237.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="360.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="194.0" layoutY="296.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="360.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="193.0" layoutY="355.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="360.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="192.0" layoutY="414.0" stroke="#dca942" strokeType="INSIDE" strokeWidth="3.0" width="360.0" />
         <Label fx:id="bookNameLabel" layoutX="219.0" layoutY="189.0" text="Book name:">
             <font>
                 <Font size="16.0" />
@@ -45,7 +44,7 @@
                 <Font size="16.0" />
             </font>
         </Label>
-        <Label layoutX="753.0" layoutY="98.0" prefHeight="30.0" prefWidth="89.0" text="Picture book">
+        <Label layoutX="750.0" layoutY="98.0" prefHeight="30.0" prefWidth="89.0" text="Picture book">
             <font>
                 <Font size="16.0" />
             </font>
@@ -58,8 +57,8 @@
         <ImageView fitHeight="65.0" fitWidth="48.0" layoutX="355.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../Image/mikkawe/details.png" />
         </ImageView>
-        <ImageView fx:id="bookImageView" fitHeight="324.0" fitWidth="248.0" layoutX="676.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
-            
+        <ImageView fx:id="bookImageView" fitHeight="324.0" fitWidth="248.0" layoutX="676.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+
         </ImageView>
         <Button fx:id="BackToHome" layoutX="27.0" layoutY="17.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
             <font>
@@ -85,7 +84,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="152.0" layoutY="671.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="157.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Delete book" textFill="WHITE">
+        <Button layoutX="152.0" layoutY="671.0" onAction="#deleteBook" mnemonicParsing="false" prefHeight="40.0" prefWidth="157.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Delete book" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>

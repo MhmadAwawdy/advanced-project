@@ -16,20 +16,20 @@
         </font>
     </Label>
 
-    <!-- Search Field -->
+
     <TextField fx:id="searchField" alignment="CENTER" layoutX="234.0" layoutY="174.0" prefHeight="46.0" prefWidth="408.0" promptText="Search" style="-fx-background-color: #FFFFFF; -fx-border-color: #DCA942; -fx-border-width: 3; -fx-background-radius: 50; -fx-border-radius: 50;" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="349.20000000000005" />
 
-    <!-- Student List View -->
+
     <ListView fx:id="studentListView" layoutX="185.0" layoutY="234.0" prefHeight="364.0" prefWidth="655.0" style="-fx-background-color: #FBF3DB; -fx-border-color: #DCA942; -fx-border-width: 3;" />
 
-    <!-- Submit Button -->
+
     <Button fx:id="submitButton" layoutX="441.0" layoutY="672.0" mnemonicParsing="false" onAction="#submitReservation" prefHeight="45.0" prefWidth="117.0" style="-fx-background-radius: 20; -fx-background-color: #DCA942;" text="Submit">
         <font>
             <Font size="15.0" />
         </font>
     </Button>
 
-    <!-- Back Button -->
+
     <Button layoutX="44.0" layoutY="65.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
         <font>
             <Font name="System Bold" size="14.0" />
@@ -39,14 +39,14 @@
         </cursor>
     </Button>
 
-    <!-- Search Button -->
+
     <Button fx:id="searchButton" layoutX="685.0" layoutY="177.0" mnemonicParsing="false" onAction="#searchStudents" prefHeight="40.0" prefWidth="117.0" style="-fx-background-radius: 20; -fx-background-color: #DCA942;" text="Search">
         <font>
             <Font size="15.0" />
         </font>
     </Button>
 
-    <!-- DatePicker for Due Date -->
+
     <DatePicker fx:id="dueDatePicker" layoutX="314.0" layoutY="615.0" prefHeight="40.0" prefWidth="390.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #DCA942; -fx-border-width: 3; -fx-background-radius: 50; -fx-border-radius: 50;" />
    <Label layoutX="167.0" layoutY="625.0" style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Select New Due Date:" />
 

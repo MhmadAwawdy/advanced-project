@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
@@ -22,30 +21,21 @@ import java.util.List;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonType;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.application.Platform;
+import librarysystem.utils.StageUtil;
 
-public class HomePageClientController {
-
-    @FXML
-    private Button reload;
-
+public class HomePageClientController
+{
     @FXML
     private TextField searchField;
-    @FXML
-    private Button searchButton;
-    @FXML
-    private Button sendButton;
     @FXML
     private ComboBox<String> filterTitleComboBox;
     @FXML
     private ComboBox<String> filterAuthorComboBox;
     @FXML
     private ComboBox<String> filterDateComboBox;
-
     @FXML
     private ImageView imageView;
-
     @FXML
     private ImageView imageView1;
     @FXML
@@ -70,15 +60,15 @@ public class HomePageClientController {
     @FXML
     private void initialize() {
 
-        filterTitleComboBox.getItems().addAll("image process", "Digital image processing", "wwww", "Book cover");
-        filterAuthorComboBox.getItems().addAll("Malak", "Mikel", "Jemmy");
-        filterDateComboBox.getItems().addAll("2022", "2024", "2010", "2019", "2013");
+        filterTitleComboBox.getItems().addAll("To Kill a Mockingbird", "The Great Gatsby", "The Alchemist", "One Hundred Years of Solitude", "Atomic Habits", "The Catcher in the Rye", "The Power", "Pride and Prejudice", "The Great Gatsby", "Sapiens: A Brief History of Humankind", "Becoming", "The Road", "The Kite Runner", "Educated");
+        filterAuthorComboBox.getItems().addAll("Harper Lee", "F. Scott Fitzgerald", "Paulo Coelho", "Gabriel García Márquez", "James Clear", "Rhonda Byrne", "J.D. Salinger", "Jane Austen", "F. Scott Fitzgerald", "Yuval Noah Harari", "Michelle Obama", "Cormac McCarthy", "Khaled Hosseini", "Tara Westover");
+        filterDateComboBox.getItems().addAll("2022", "2024", "2010", "2019", "2013", "2025", "2011", "2009", "1913", "2003", "2018", "2006", "2011", "2001", "2004", "1925");
 
 
         Platform.runLater(this::loadInitialBooks);
     }
 
-    private void loadInitialBooks() {
+        private void loadInitialBooks() {
         try {
 
             List<Book> books = bookService.getAllBooks();
@@ -125,24 +115,15 @@ public class HomePageClientController {
         }
     }
 
-    @FXML
-    private void loadBooks() {
-        try {
-            List<Book> books = bookService.getAllBooks();
-            displayBooks(books);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     private void displayBooks(List<Book> books) {
         resetImages();
         for (int i = 0; i < books.size() && i < 9; i++) {
             Book book = books.get(i);
             Image image = bookService.getImageByBookTitle(book.getTitle());
 
-            // إذا كانت الصورة فارغة أو غير موجودة، استخدم صورة افتراضية
+
             if (image == null) {
-                image = new Image("/path/to/default/image.png"); // استخدم صورة افتراضية
+                image = new Image("/path/to/default/image.png");
             }
 
             switch (i) {
@@ -226,14 +207,16 @@ public class HomePageClientController {
                     String.valueOf(book.getPublishDate()),
                     book.getType(),
                     book.getStatus().toString(),
-                    bookImage
-            );
+                    bookImage,
+                    book.getId()
+                        );
 
 
             Stage stage = new Stage();
             stage.setTitle("Book Details - " + book.getTitle());
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            StageUtil.setAppIcon(stage);
             stage.show();
 
         } catch (IOException e) {
@@ -271,11 +254,6 @@ public class HomePageClientController {
         imageView.setOpacity(1);
     }
 
-
-
-
-
-
     private void showAlert(String title, String message) {
         Alert alert = new Alert(AlertType.INFORMATION, message, ButtonType.OK);
         alert.setTitle(title);
@@ -290,6 +268,7 @@ public class HomePageClientController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene newScene = new Scene(root);
             stage.setScene(newScene);
+            StageUtil.setAppIcon(stage);
             stage.show();
             System.out.println("The reload button has been pressed!");
 
@@ -308,6 +287,7 @@ public class HomePageClientController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setTitle("Book Details");
+            StageUtil.setAppIcon(stage);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -331,8 +311,6 @@ public class HomePageClientController {
     }
 
 
-
-
     public void GoBack(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Auth/WelcomePage.fxml"));
@@ -340,15 +318,12 @@ public class HomePageClientController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setTitle("Library Reservation System");
+            StageUtil.setAppIcon(stage);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
-
 
 }

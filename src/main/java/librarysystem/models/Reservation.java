@@ -37,12 +37,13 @@ public class Reservation {
     @Column(name = "Book_Name", nullable = false)
     private String bookName;
 
-    public Book getBook(Session session) {
-        // Use Hibernate to get the Book based on the bookId
+    public Book getBook(Session session)
+    {
         return session.get(Book.class, this.bookId);
     }
-
-    // Getters and Setters
+    public Book getBook() {
+        return null;
+    }
     public String getBookName() {
         return bookName;
     }
@@ -59,13 +60,9 @@ public class Reservation {
         this.studentName = studentName;
     }
 
-    public int getId() {
-        return id; // Changed from getReservationId to getId
-    }
+    public int getId() {return id;}
 
-    public void setId(int id) {
-        this.id = id; // Changed from setReservationId to setId
-    }
+    public void setId(int id) {this.id = id;}
 
     public int getStudentId() {
         return studentId;

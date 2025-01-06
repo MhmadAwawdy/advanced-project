@@ -21,9 +21,11 @@ module com.example.librarysystem {
     requires java.persistence;
     requires mysql.connector.java;
     requires org.slf4j;
+    requires annotations;
 
 
     opens librarysystem.models to org.hibernate.orm.core;
+    exports librarysystem.models;
 
     opens librarysystem.app to javafx.fxml;
     exports librarysystem.app;

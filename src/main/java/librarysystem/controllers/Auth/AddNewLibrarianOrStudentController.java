@@ -15,6 +15,7 @@ import librarysystem.models.services.LibrarianDAOimp;
 import librarysystem.models.services.StudentDAOImp;
 import librarysystem.utils.PasswordEncryption;
 import librarysystem.utils.SessionManager;
+import librarysystem.utils.StageUtil;
 
 import java.net.URL;
 import java.util.Objects;
@@ -22,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class AddNewLibrarianOrStudentController implements Initializable {
 
+    @FXML private TextField studentIDField;
     @FXML private Button newClient_Back;
     @FXML private Button newLibrarian_Back;
     @FXML private TextField signup_email;
@@ -45,10 +47,10 @@ public class AddNewLibrarianOrStudentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Check the role of the logged-in user
+
         Librarian loggedInUser = SessionManager.getLoggedInLibrarian();
         if (loggedInUser == null || !"Admin".equalsIgnoreCase(loggedInUser.getRole())) {
-            // Disable or hide the registration-related controls for librarians
+
             signup_email.setDisable(true);
             signup_username.setDisable(true);
             signup_password.setDisable(true);
@@ -66,6 +68,7 @@ public class AddNewLibrarianOrStudentController implements Initializable {
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
                 currentStage.setTitle("Library Reservation System");
+                StageUtil.setAppIcon(currentStage);
                 currentStage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -78,6 +81,7 @@ public class AddNewLibrarianOrStudentController implements Initializable {
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
                 currentStage.setTitle("Library Reservation System");
+                StageUtil.setAppIcon(currentStage);
                 currentStage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -90,6 +94,7 @@ public class AddNewLibrarianOrStudentController implements Initializable {
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
                 currentStage.setTitle("Library Reservation System");
+                StageUtil.setAppIcon(currentStage);
                 currentStage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -102,11 +107,17 @@ public class AddNewLibrarianOrStudentController implements Initializable {
         if (!validateStudentInput()) {
             return;
         }
+        if (studentDAOImp.findById(Integer.parseInt(studentIDField.getText())) != null)
+        {
+            displayErrorStudent("This student ID is already registered.");
+            return;
+        }
         if (studentDAOImp.findByPhone(studentPhoneField.getText()) != null) {
             displayErrorStudent("This phone number is already registered.");
             return;
         }
         Student student = new Student();
+        student.setStudentID(Integer.parseInt(studentIDField.getText().trim()));
         student.setStudentName(studentNameField.getText().trim());
         student.setStudentPhone(studentPhoneField.getText().trim());
 
@@ -118,14 +129,25 @@ public class AddNewLibrarianOrStudentController implements Initializable {
     }
 
     private boolean validateStudentInput() {
-        if (studentNameField.getText().isEmpty() || studentPhoneField.getText().isEmpty()) {
-            displayErrorStudent("Both fields are required.");
+
+        if (studentNameField.getText().isEmpty() || studentPhoneField.getText().isEmpty() || studentIDField.getText().isEmpty())
+        {
+            displayErrorStudent("All fields are required.");
             return false;
         }
-        if (!studentPhoneField.getText().matches("\\d{10,15}")) {
-            displayErrorStudent("Invalid phone number. It should be 10 to 15 digits long.");
+        String phoneNumber = studentPhoneField.getText();
+        if (!phoneNumber.matches("^05\\d{8}$"))
+        {
+            displayErrorStudent("Invalid phone number. It must start with 05 and contain exactly 10 digits.");
             return false;
         }
+        String studentID = studentIDField.getText();
+        if (!studentID.matches("^\\d{8}$"))
+        {
+            displayErrorStudent("Invalid student ID. It must be exactly 8 digits.");
+            return false;
+        }
+
         return true;
     }
 
@@ -136,6 +158,7 @@ public class AddNewLibrarianOrStudentController implements Initializable {
     }
 
     private void clearFieldsStudent() {
+        studentIDField.clear();
         studentNameField.clear();
         studentPhoneField.clear();
     }

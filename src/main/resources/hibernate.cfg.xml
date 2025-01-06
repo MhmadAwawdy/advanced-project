@@ -13,10 +13,12 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.id.new_generator_mappings">false</property>
+        <property name="hibernate.current_session_context_class">thread</property>
         <mapping class="librarysystem.models.Reservation"/>
         <mapping class="librarysystem.models.Student"/>
 
-
+        <mapping class="librarysystem.models.ReservationReq" />
+        <mapping class="librarysystem.models.Book" />
 
     </session-factory>
 </hibernate-configuration>

@@ -8,58 +8,76 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-public class LibrarianDAOimp implements LibrarianDAO {
+public class LibrarianDAOimp implements LibrarianDAO
+{
     private HibernateUtil hibernateUtil;
     private SessionFactory sessionFactory;
 
-    public LibrarianDAOimp() {
+    public LibrarianDAOimp()
+    {
         hibernateUtil = HibernateUtil.getInstance();
         sessionFactory = hibernateUtil.getSessionFactory();
     }
-
     @Override
-    public void save(Librarian librarian) {
+    public void save(Librarian librarian)
+    {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
-
-        try {
+        try
+        {
             transaction = session.beginTransaction();
             session.save(librarian);
             transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
+        }
+        catch (Exception e)
+        {
+            if (transaction != null)
+            {
                 transaction.rollback();
             }
             throw new RuntimeException("Error saving librarian", e);
-        } finally {
+        }
+        finally
+        {
             session.close();
         }
     }
-    public Librarian findByUsername(String username) {
+    public Librarian findByUsername(String username)
+    {
         Session session = sessionFactory.openSession();
-        try {
+        try
+        {
             String hql = "FROM Librarian WHERE username = :username";
             Query<Librarian> query = session.createQuery(hql, Librarian.class);
             query.setParameter("username", username);
             return query.uniqueResult();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException("Error fetching Librarian by username", e);
-        } finally {
+        }
+        finally
+        {
             session.close();
         }
     }
-    public Librarian findByEmail(String email) {
+    public Librarian findByEmail(String email)
+    {
         Session session = sessionFactory.openSession();
-        try {
+        try
+        {
             String hql = "FROM Librarian WHERE email = :email";
             Query<Librarian> query = session.createQuery(hql, Librarian.class);
             query.setParameter("email", email);
             return query.uniqueResult();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException("Error fetching Librarian by email", e);
-        } finally {
+        }
+        finally
+        {
             session.close();
         }
     }
-
 }

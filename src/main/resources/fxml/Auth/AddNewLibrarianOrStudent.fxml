@@ -12,55 +12,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
-            prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="librarysystem.controllers.Auth.AddNewLibrarianOrStudentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarysystem.controllers.Auth.AddNewLibrarianOrStudentController">
     <TabPane prefHeight="750.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
         <Tab text="Add Student">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1000.0">
                 <Label layoutX="386.0" layoutY="104.0" text="Add new Student">
                     <font>
-                        <Font name="System Bold" size="28.0"/>
+                        <Font name="System Bold" size="28.0" />
                     </font>
                 </Label>
-                <AnchorPane layoutX="250.0" layoutY="173.0" prefHeight="460.0" prefWidth="500.0"
-                            style="-fx-background-color: #FBF3DB; -fx-background-radius: 20px; -fx-border-color: #DCA942; -fx-border-radius: 20px;">
-                    <TextField fx:id="studentNameField" layoutX="95.0" layoutY="215.0" prefHeight="47.0"
-                               prefWidth="311.0" promptText=" client name"
-                               style="-fx-border-color: #DCA942; -fx-background-radius: 20px; -fx-border-radius: 20px;"/>
-                    <TextField fx:id="studentPhoneField" layoutX="95.0" layoutY="276.0" prefHeight="47.0"
-                               prefWidth="311.0" promptText=" Phone Number"
-                               style="-fx-border-color: #DCA942; -fx-background-radius: 20px; -fx-border-radius: 20px;"/>
-                    <Label fx:id="errorMessageLabel" layoutX="139.0" layoutY="146.0" text="Add name and phone number"
-                           textFill="#dca942">
+                <AnchorPane layoutX="250.0" layoutY="173.0" prefHeight="460.0" prefWidth="500.0" style="-fx-background-color: #FBF3DB; -fx-background-radius: 20px; -fx-border-color: #DCA942; -fx-border-radius: 20px;">
+                    <TextField fx:id="studentIDField" layoutX="95.0" layoutY="182.0" prefHeight="47.0" prefWidth="311.0" promptText=" Student ID " style="-fx-border-color: #DCA942; -fx-background-radius: 20px; -fx-border-radius: 20px;" />
+                    <TextField fx:id="studentNameField" layoutX="94.0" layoutY="244.0" prefHeight="47.0" prefWidth="311.0" promptText="Student Name" style="-fx-border-color: #DCA942; -fx-background-radius: 20px; -fx-border-radius: 20px;" />
+                    <TextField fx:id="studentPhoneField" layoutX="94.0" layoutY="308.0" prefHeight="47.0" prefWidth="311.0" promptText=" Phone Number" style="-fx-border-color: #DCA942; -fx-background-radius: 20px; -fx-border-radius: 20px;" />
+                    <Label fx:id="errorMessageLabel" layoutX="121.0" layoutY="146.0" text="Add ID , Name and Phone Number" textFill="#dca942">
                         <font>
-                            <Font name="System Bold Italic" size="16.0"/>
+                            <Font name="System Bold Italic" size="16.0" />
                         </font>
                     </Label>
-                    <Button onAction="#savestudent" layoutX="175.0" layoutY="378.0" mnemonicParsing="false"
-                            prefHeight="40.0" prefWidth="150.0"
-                            style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Submit"
-                            textFill="WHITE">
+                    <Button layoutX="175.0" layoutY="378.0" mnemonicParsing="false" onAction="#savestudent" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10px;" text="Submit" textFill="WHITE">
                         <font>
-                            <Font name="System Bold" size="16.0"/>
+                            <Font name="System Bold" size="16.0" />
                         </font>
                         <cursor>
-                            <Cursor fx:constant="HAND"/>
+                            <Cursor fx:constant="HAND" />
                         </cursor>
                     </Button>
-                    <ImageView fitHeight="163.0" fitWidth="167.0" layoutX="167.0" pickOnBounds="true"
-                               preserveRatio="true">
-                        <Image url="@../../Image/Logo.png"/>
+                    <ImageView fitHeight="163.0" fitWidth="167.0" layoutX="167.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../Image/Logo.png" />
                     </ImageView>
                 </AnchorPane>
-                <Button fx:id="newClient_Back" layoutX="45.0" layoutY="109.0" mnemonicParsing="false"
-                        onAction="#switchForm" prefHeight="30.0" prefWidth="60.0"
-                        style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
+                <Button fx:id="newClient_Back" layoutX="45.0" layoutY="109.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
                     <font>
-                        <Font name="System Bold" size="14.0"/>
+                        <Font name="System Bold" size="14.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
             </AnchorPane>
@@ -71,106 +58,81 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1000.0">
                 <Label layoutX="194.0" layoutY="89.0" text="Sign Up Account">
                     <font>
-                        <Font name="System Bold" size="28.0"/>
+                        <Font name="System Bold" size="28.0" />
                     </font>
                 </Label>
-                <TextField fx:id="signup_email" layoutX="139.0" layoutY="212.0" prefHeight="47.0" prefWidth="330.0"
-                           promptText="Email address"
-                           style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+                <TextField fx:id="signup_email" layoutX="139.0" layoutY="212.0" prefHeight="47.0" prefWidth="330.0" promptText="Email address" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="signup_username" layoutX="139.0" layoutY="282.0" prefHeight="47.0" prefWidth="330.0"
-                           promptText="username"
-                           style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+                <TextField fx:id="signup_username" layoutX="139.0" layoutY="282.0" prefHeight="47.0" prefWidth="330.0" promptText="username" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="signup_phone" layoutX="139.0" layoutY="348.0" prefHeight="47.0" prefWidth="330.0"
-                           promptText="Phone Number"
-                           style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+                <TextField fx:id="signup_phone" layoutX="139.0" layoutY="348.0" prefHeight="47.0" prefWidth="330.0" promptText="Phone Number" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </TextField>
-                <PasswordField fx:id="signup_password" layoutX="139.0" layoutY="416.0" prefHeight="47.0"
-                               prefWidth="330.0" promptText="password"
-                               style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+                <PasswordField fx:id="signup_password" layoutX="139.0" layoutY="416.0" prefHeight="47.0" prefWidth="330.0" promptText="password" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </PasswordField>
-                <PasswordField fx:id="signup_cPassword" layoutX="139.0" layoutY="486.0" prefHeight="47.0"
-                               prefWidth="330.0" promptText="Confirm password"
-                               style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
+                <PasswordField fx:id="signup_cPassword" layoutX="139.0" layoutY="486.0" prefHeight="47.0" prefWidth="330.0" promptText="Confirm password" style="-fx-border-color: #DCA942; -fx-background-radius: 20PX; -fx-border-radius: 20PX;">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </PasswordField>
-                <Label fx:id="signup_errorMessage" alignment="CENTER" layoutX="13.0" layoutY="555.0" prefHeight="30.0"
-                       prefWidth="580.0" textFill="red" visible="false">
+                <Label fx:id="signup_errorMessage" alignment="CENTER" layoutX="13.0" layoutY="555.0" prefHeight="30.0" prefWidth="580.0" textFill="red" visible="false">
                     <font>
-                        <Font name="System Bold" size="14.0"/>
+                        <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Button layoutX="251.0" layoutY="614.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0"
-                        prefWidth="150.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;"
-                        text="Sign Up" textFill="WHITE">
+                <Button layoutX="251.0" layoutY="614.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Sign Up" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="16.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="421.0" layoutY="217.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <Image url="@../../Image/email.png"/>
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="421.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../Image/email.png" />
                 </ImageView>
-                <ImageView fitHeight="18.0" fitWidth="17.0" layoutX="438.0" layoutY="297.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <Image url="@../../Image/user.png"/>
+                <ImageView fitHeight="18.0" fitWidth="17.0" layoutX="438.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../Image/user.png" />
                 </ImageView>
-                <ImageView fitHeight="18.0" fitWidth="17.0" layoutX="438.0" layoutY="363.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <Image url="@../../Image/phone-circle.png"/>
+                <ImageView fitHeight="18.0" fitWidth="17.0" layoutX="438.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../Image/phone-circle.png" />
                 </ImageView>
-                <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="430.0" layoutY="423.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <Image url="@../../Image/lock.png"/>
+                <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="430.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../Image/lock.png" />
                 </ImageView>
-                <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="430.0" layoutY="493.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <Image url="@../../Image/lock.png"/>
+                <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="430.0" layoutY="493.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../Image/lock.png" />
                 </ImageView>
-                <AnchorPane layoutX="655.0" layoutY="-5.0" prefHeight="771.0" prefWidth="354.0"
-                            style="-fx-background-color: #FBF3DB;">
-                    <ImageView fitHeight="272.0" fitWidth="260.0" layoutX="47.0" layoutY="211.0" pickOnBounds="true"
-                               preserveRatio="true">
-                        <Image url="@../../Image/Logo.png"/>
+                <AnchorPane layoutX="655.0" layoutY="-5.0" prefHeight="771.0" prefWidth="354.0" style="-fx-background-color: #FBF3DB;">
+                    <ImageView fitHeight="272.0" fitWidth="260.0" layoutX="47.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../Image/Logo.png" />
                     </ImageView>
-                    <Button fx:id="signup_loginAccount" layoutX="102.0" layoutY="458.0" mnemonicParsing="false"
-                            onAction="#switchForm" prefHeight="40.0" prefWidth="150.0"
-                            style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="LogIn"
-                            textFill="WHITE">
+                    <Button fx:id="signup_loginAccount" layoutX="102.0" layoutY="458.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="LogIn" textFill="WHITE">
                         <font>
-                            <Font name="System Bold" size="16.0"/>
+                            <Font name="System Bold" size="16.0" />
                         </font>
                         <cursor>
-                            <Cursor fx:constant="HAND"/>
+                            <Cursor fx:constant="HAND" />
                         </cursor>
                     </Button>
                 </AnchorPane>
-                <Button fx:id="newLibrarian_Back" layoutX="53.0" layoutY="94.0" mnemonicParsing="false"
-                        onAction="#switchForm" prefHeight="30.0" prefWidth="60.0"
-                        style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
+                <Button fx:id="newLibrarian_Back" layoutX="53.0" layoutY="94.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #DCA942; -fx-background-radius: 10PX;" text="Back">
                     <font>
-                        <Font name="System Bold" size="14.0"/>
+                        <Font name="System Bold" size="14.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
             </AnchorPane>

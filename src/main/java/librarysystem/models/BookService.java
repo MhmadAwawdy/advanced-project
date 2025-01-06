@@ -1,202 +1,101 @@
 package librarysystem.models;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import librarysystem.controllers.Client.BookDetailsClientController;
 import librarysystem.models.services.BookDAO;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class BookService {
+public class BookService
+{
     private final BookDAO bookDAO;
-
-    public BookService() {
+    public BookService()
+    {
         this.bookDAO = new BookDAO();
     }
 
-    public List<Book> getAllBooks() {
-        try {
+    public List<Book> getAllBooks()
+    {
+        try
+        {
             List<Book> books = bookDAO.getAllBooks();
-            if (books == null) {
+            if (books == null)
+            {
                 return new ArrayList<>();
             }
-
             List<Book> booksWithImages = new ArrayList<>();
-            for (Book book : books) {
-                if (book != null && bookDAO.hasImage(book.getTitle())) {
+            for (Book book : books)
+            {
+                if (book != null && bookDAO.hasImage(book.getTitle()))
+                {
                     booksWithImages.add(book);
-                    if (booksWithImages.size() >= 9) {
+                    if (booksWithImages.size() >= 9)
+                    {
                         break;
                     }
                 }
             }
             return booksWithImages;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             System.err.println("Error fetching all books: " + e.getMessage());
             e.printStackTrace();
             return new ArrayList<>();
         }
     }
-
-    public List<Book> filterBooks(String searchText, String selectedTitle, String selectedAuthor, String selectedDate) {
-        try {
+    public List<Book> filterBooks(String searchText, String selectedTitle, String selectedAuthor, String selectedDate)
+    {
+        try
+        {
             List<Book> books = bookDAO.filterBooks(searchText, selectedTitle, selectedAuthor, selectedDate);
-            if (books == null) {
+            if (books == null)
+            {
                 return new ArrayList<>();
             }
             return books;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             System.err.println("Error filtering books: " + e.getMessage());
             e.printStackTrace();
             return new ArrayList<>();
         }
     }
-
-    public List<Book> filterBooksByTitle(String title) {
-        return filterBooks(title, null, null, null);
-    }
-
-    public List<Book> filterBooksByAuthor(String author) {
-        return filterBooks(null, null, author, null);
-    }
-
-    public List<Book> filterBooksByDate(String date) {
-        return filterBooks(null, null, null, date);
-    }
-
-    public List<Book> searchBooksByTitle(String title) {
-        try {
+    public List<Book> searchBooksByTitle(String title)
+    {
+        try
+        {
             List<Book> books = bookDAO.getBooksByTitle(title);
-            if (books == null) {
+            if (books == null)
+            {
                 return new ArrayList<>();
             }
             return books;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             System.err.println("Error searching books by title: " + e.getMessage());
             e.printStackTrace();
             return new ArrayList<>();
         }
     }
-
-    public boolean isBookExists(String title, String author) {
-        try {
-            return bookDAO.isBookExists(title, author);
-        } catch (Exception e) {
-            System.err.println("Error checking if book exists: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public void saveBook(Book book, InputStream bookImageStream) {
-        try {
-            if (book != null) {
-
-                bookDAO.save(book);
-
-
-                if (bookImageStream != null) {
-                    bookDAO.saveBookImage(book.getTitle(), bookImageStream);
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Error saving book: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    public Book getBookDetailsByTitle(String title) {
-        try {
-            return bookDAO.getBookDetailsByTitle(title);
-        } catch (Exception e) {
-            System.err.println("Error fetching book details: " + e.getMessage());
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public Image getImageByBookTitle(String title) {
-        try {
+    public Image getImageByBookTitle(String title)
+    {
+        try
+        {
             Image image = bookDAO.getImageByBookTitle(title);
-            if (image == null) {
-
-                return new Image(getClass().getResourceAsStream("/images/default-book.png"));
+            if (image == null)
+            {
+                return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/default-book.png")));
             }
             return image;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             System.err.println("Error fetching book image: " + e.getMessage());
             e.printStackTrace();
-
-            return new Image(getClass().getResourceAsStream("/images/default-book.png"));
-        }
-    }
-
-    public List<String> getAvailableTitles() {
-        try {
-            List<String> titles = bookDAO.getAvailableTitles();
-            if (titles == null) {
-                return new ArrayList<>();
-            }
-            return titles;
-        } catch (Exception e) {
-            System.err.println("Error fetching available titles: " + e.getMessage());
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
-
-    public void onBookImageClick(Book book, MouseEvent event) {
-        if (book == null) {
-            System.err.println("Cannot open details for null book");
-            return;
-        }
-
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuestPage/BookDetails.fxml"));
-            Parent root = loader.load();
-
-
-            BookDetailsClientController controller = loader.getController();
-
-
-            Image bookImage = getImageByBookTitle(book.getTitle());
-
-
-            controller.setBookDetails(
-                    book.getTitle(),
-                    book.getAuthor(),
-                    String.valueOf(book.getPublishDate()),
-                    book.getType(),
-                    book.getStatus().toString(),
-                    bookImage
-            );
-
-
-            Stage stage = new Stage();
-            stage.setTitle("Book Details - " + book.getTitle());
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-
-            stage.sizeToScene();
-
-
-            stage.show();
-
-        } catch (IOException e) {
-            System.err.println("Error opening book details: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("Unexpected error: " + e.getMessage());
-            e.printStackTrace();
+            return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/default-book.png")));
         }
     }
 }

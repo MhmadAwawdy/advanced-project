@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import librarysystem.utils.StageUtil;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -23,6 +24,7 @@ public class WelcomePageController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setTitle("Library Reservation System");
+            StageUtil.setAppIcon(stage);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -37,6 +39,7 @@ public class WelcomePageController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setTitle("LogIn");
+            StageUtil.setAppIcon(stage);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

@@ -1,66 +1,98 @@
 package librarysystem.controllers.HomePage;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import librarysystem.models.Librarian;
+import librarysystem.utils.SessionManager;
+import librarysystem.utils.StageUtil;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public class ProfileController {
+public class ProfileController
+{
+    @FXML
+    public Label phoneLabel;
+    @FXML
+    public Label dateLabel;
+    @FXML
+    public Label roleLabel;
     @FXML
     private ImageView profileImage;
     @FXML
-    private Label detailsLabel;
+    private Label nameLabel;
     @FXML
-    private Button logoutButton;
+    private Label emailLabel;
+    @FXML
+    public void initialize()
+    {
 
-    @FXML
-    public void initialize() {
-        try {
-            Image image = new Image(getClass().getResource("/Image/profile.png").toExternalForm());
-            profileImage.setImage(image);
-            Circle clip = new Circle(profileImage.getFitWidth() / 2, profileImage.getFitHeight() / 2, Math.min(profileImage.getFitWidth(), profileImage.getFitHeight()) / 2);
-            profileImage.setClip(clip);
-        } catch (NullPointerException e) {
-            System.out.println("Error: Profile image not found.");
+        Librarian librarian = SessionManager.getLoggedInLibrarian();
+
+        if (librarian != null)
+        {
+            nameLabel.setText( librarian.getUsername());
+            roleLabel.setText( librarian.getRole());
+            emailLabel.setText( librarian.getEmail());
+            phoneLabel.setText( librarian.getPhoneNumber());
+            dateLabel.setText(String.valueOf(librarian.getDate()));
+
+            try
+            {
+                Image image = new Image(Objects.requireNonNull(getClass().getResource("/Image/profile.png")).toExternalForm());
+                profileImage.setImage(image);
+            }
+            catch (Exception e)
+            {
+                System.out.println("Profile image not found.");
+            }
+        }
+        else
+        {
+            System.out.println("No logged-in librarian found.");
         }
     }
-
-    @FXML
-    private void logout(ActionEvent event) {
-        System.out.println("Logged Out Successfully!");
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Auth/logIn.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setTitle("LogIn");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void switchForm(ActionEvent event) {
-        try {
+    public void switchForm(javafx.event.ActionEvent event)
+    {
+        try
+        {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage/HomePageLibrarians.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setTitle("Library Reservation System");
+            StageUtil.setAppIcon(stage);
             stage.setScene(scene);
             stage.show();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void logout(javafx.event.ActionEvent event)
+    {
+        System.out.println("Logged Out Successfully!");
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Auth/logIn.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("LogIn");
+            StageUtil.setAppIcon(stage);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }

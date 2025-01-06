@@ -6,7 +6,8 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "librarian")
-public class Librarian {
+public class Librarian
+{
     @Id
     @GeneratedValue
     private int id;

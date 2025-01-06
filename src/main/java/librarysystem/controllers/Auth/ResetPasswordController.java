@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import librarysystem.utils.HibernateUtil;
 import librarysystem.utils.PasswordEncryption;
+import librarysystem.utils.StageUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -36,6 +37,7 @@ public class ResetPasswordController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Forgot Password");
+            StageUtil.setAppIcon(stage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -3,8 +3,9 @@ package librarysystem.models.interfaces;
 import librarysystem.models.Student;
 import java.util.List;
 
-public interface StudentDAO {
+public interface StudentDAO
+{
     void save(Student student);
     Student findByPhone(String phone);
-    List<Student> getAllStudents(); // Keep only this method
+    List<Student> getAllStudents();
 }

@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import librarysystem.utils.StageUtil;
 
 import java.net.URL;
 import java.util.Objects;
@@ -43,6 +44,7 @@ public class LogInController implements Initializable {
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
                 currentStage.setTitle("Forgot Password");
+                StageUtil.setAppIcon(currentStage);
                 currentStage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -54,6 +56,7 @@ public class LogInController implements Initializable {
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
                 currentStage.setTitle("Library Reservation System");
+                StageUtil.setAppIcon(currentStage);
                 currentStage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -85,6 +88,7 @@ public class LogInController implements Initializable {
                         stage.setTitle("Home Library System");
                         Scene scene = new Scene(root);
                         stage.setScene(scene);
+                        StageUtil.setAppIcon(stage);
                         stage.show();
 
                         // Close the login window

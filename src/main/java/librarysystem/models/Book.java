@@ -1,8 +1,6 @@
 package librarysystem.models;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.Instant;
 
 @Entity
 @Table(name = "book")
@@ -31,37 +29,26 @@ public class Book {
 
     public enum BookStatus
     {
-        available, reserved
+        available, AVAILABLE, UNAVAILABLE, RESERVED, reserved
     }
 
+    @Override
+    public String toString() {
+        return "Book ID: " + id + ", Title: " + title + ", Author: " + author;
+    }
 
     @Lob
     @Column(name = "image")
     private byte[] image;
 
-    @Column(name = "imageUrl")
-    private String imageUrl;
-
-    @Column(name = "createdAt", updatable = false)
-    private Timestamp createdAt;
-
-    @Column(name = "updatedAt")
-    private Timestamp updatedAt;
-
     @PrePersist
-    protected void onCreate() {
-        createdAt = Timestamp.from(Instant.now());
-        updatedAt = Timestamp.from(Instant.now());
-        if (status == null) {
+    protected void onCreate()
+    {
+        if (status == null)
+        {
             status = BookStatus.available;
         }
     }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = Timestamp.from(Instant.now());
-    }
-
 
     public int getId() {
         return id;
@@ -119,32 +106,4 @@ public class Book {
         this.image = image;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public byte[] getImageData() {
-        return image;
-    }
 }

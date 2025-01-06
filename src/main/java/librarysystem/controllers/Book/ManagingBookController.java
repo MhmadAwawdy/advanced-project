@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import librarysystem.models.Book;
 import librarysystem.models.Book.BookStatus;
 import librarysystem.models.services.BookDAOImp;
+import librarysystem.utils.StageUtil;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -139,7 +141,7 @@ public class ManagingBookController {
                 BookStatus.valueOf(statusStr);
                 clearError(statusField, statusErrorText);
             } catch (IllegalArgumentException e) {
-                showError(statusField, statusErrorText, "Status must be 'AVAILABLE' or 'UNAVAILABLE'.");
+                showError(statusField, statusErrorText, "Status must be 'AVAILABLE', 'UNAVAILABLE', or 'RESERVED'.");
                 valid = false;
             }
         }
@@ -177,22 +179,22 @@ public class ManagingBookController {
                 newBook.setType(type);
                 newBook.setPublishDate(publishDate);
 
-                // Set the status using the BookStatus enum
-                BookStatus bookStatus = BookStatus.available; // Default to AVAILABLE
-                if (statusStr != null) {
-                    switch (statusStr.toUpperCase()) {
-                        case "AVAILABLE":
-                            bookStatus = BookStatus.available;
-                            break;
-                        case "RESERVED":
-                            bookStatus = BookStatus.reserved;
-                            break;
-                        default:
-                            System.err.println("Invalid status: " + statusStr);
-                            break;
-                    }
+                BookStatus bookStatus = BookStatus.AVAILABLE;
+                switch (statusStr) {
+                    case "AVAILABLE":
+                        bookStatus = BookStatus.AVAILABLE;
+                        break;
+                    case "UNAVAILABLE":
+                        bookStatus = BookStatus.UNAVAILABLE;
+                        break;
+                    case "RESERVED":
+                        bookStatus = BookStatus.RESERVED;
+                        break;
+                    default:
+                        System.err.println("Invalid status: " + statusStr);
+                        break;
                 }
-                newBook.setStatus(bookStatus); // Set the status of the new book
+                newBook.setStatus(bookStatus);
 
                 newBook.setImage(bookImage);
 
@@ -249,6 +251,7 @@ public class ManagingBookController {
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
                 currentStage.setTitle("Library Reservation System");
+                StageUtil.setAppIcon(currentStage);
                 currentStage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -261,6 +264,7 @@ public class ManagingBookController {
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
                 currentStage.setTitle("Library Reservation System");
+                StageUtil.setAppIcon(currentStage);
                 currentStage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -303,7 +307,7 @@ public class ManagingBookController {
                 bookToUpdate.setAuthor(author);
                 bookToUpdate.setType(type);
                 bookToUpdate.setPublishDate(publishDate);
-                //bookToUpdate.setStatus(BookStatus.valueOf(statusStr));
+                bookToUpdate.setStatus(BookStatus.valueOf(statusStr));
 
                 boolean isUpdated = bookDAOImp.update(bookToUpdate);
                 if (isUpdated) {

@@ -5,16 +5,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.event.ActionEvent;
+import librarysystem.controllers.Reservation.ReservationController;
+import librarysystem.utils.StageUtil;
 
 import java.io.IOException;
 import java.util.Objects;
-
 
 public class BookDetailsClientController {
 
@@ -43,63 +43,36 @@ public class BookDetailsClientController {
     private ImageView returnArrowImageView;
 
     @FXML
-    private void initialize() {
+    private Button ReservationRequest;
 
+    private int bookId;
+
+    @FXML
+    private void initialize() {
         setupReturnArrowImage();
     }
 
-    public void setBookDetails(String title, String author, String publishDate, String type, String status, Image bookImage) {
-        try {
+    public void setBookDetails(String title, String author, String publishDate, String type, String status, Image bookImage, int bookId)
+    {
+        try
+        {
+            this.bookId = bookId;
+            bookTitleLabel.setText(title != null && !title.isEmpty() ? title : "Title Not Available");
+            authorLabel.setText(author != null && !author.isEmpty() ? author : "Author Unknown");
+            publishDateLabel.setText(publishDate != null && !publishDate.isEmpty() ? publishDate : "Publication Date Unknown");
+            statusLabel.setText(type != null && !type.isEmpty() ? type : "Type Not Specified");
+            statusLabel1.setText(status != null && !status.isEmpty() ? status : "Status Unknown");
 
-            if (title != null && !title.isEmpty()) {
-                bookTitleLabel.setText(title);
-            } else {
-                bookTitleLabel.setText("Title Not Available");
+            if ("Available".equalsIgnoreCase(status)) {
+                statusLabel1.setStyle("-fx-text-fill: green;");
+            } else if ("Unavailable".equalsIgnoreCase(status)) {
+                statusLabel1.setStyle("-fx-text-fill: red;");
             }
 
-
-            if (author != null && !author.isEmpty()) {
-                authorLabel.setText(author);
-            } else {
-                authorLabel.setText("Author Unknown");
-            }
-
-
-            if (publishDate != null && !publishDate.isEmpty()) {
-                publishDateLabel.setText(publishDate);
-            } else {
-                publishDateLabel.setText("Publication Date Unknown");
-            }
-
-            if (type != null && !type.isEmpty()) {
-                statusLabel.setText(type);
-            } else {
-                statusLabel.setText("Type Not Specified");
-            }
-
-
-            if (status != null && !status.isEmpty()) {
-                statusLabel1.setText(status);
-
-                if (status.equalsIgnoreCase("Available")) {
-                    statusLabel1.setStyle("-fx-text-fill: green;");
-                } else if (status.equalsIgnoreCase("Unavailable")) {
-                    statusLabel1.setStyle("-fx-text-fill: red;");
-                }
-            } else {
-                statusLabel1.setText("Status Unknown");
-            }
-
-
-            if (bookImage != null) {
-                bookImageView.setImage(bookImage);
-                bookImageView.setFitWidth(200);
-                bookImageView.setFitHeight(300);
-                bookImageView.setPreserveRatio(true);
-            } else {
-
-                bookImageView.setImage(new Image(getClass().getResourceAsStream("/images/default-book.png")));
-            }
+            bookImageView.setImage(bookImage != null ? bookImage : new Image(getClass().getResourceAsStream("/images/default-book.png")));
+            bookImageView.setFitWidth(200);
+            bookImageView.setFitHeight(300);
+            bookImageView.setPreserveRatio(true);
 
         } catch (Exception e) {
             System.err.println("Error setting book details: " + e.getMessage());
@@ -108,9 +81,32 @@ public class BookDetailsClientController {
     }
 
     @FXML
+    public void goForward(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == ReservationRequest) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Reservation/ReservationPage.fxml"));
+                Parent root = loader.load();
+
+                ReservationController reservationController = loader.getController();
+
+                reservationController.setBookId(bookId);
+
+                Stage currentStage = (Stage) ReservationRequest.getScene().getWindow();
+                Scene scene = new Scene(root);
+                currentStage.setScene(scene);
+                currentStage.setTitle("Reservation Book");
+                StageUtil.setAppIcon(currentStage);
+                currentStage.show();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
     private void handleBackButtonAction() {
         try {
-
             Stage currentStage = (Stage) bookTitleLabel.getScene().getWindow();
             currentStage.close();
         } catch (Exception e) {
@@ -121,85 +117,14 @@ public class BookDetailsClientController {
 
     private void setupReturnArrowImage() {
         try {
-
             if (returnArrowImageView != null) {
                 returnArrowImageView.setOnMouseClicked(event -> handleBackButtonAction());
-                returnArrowImageView.setOnMouseEntered(event ->
-                        returnArrowImageView.setStyle("-fx-opacity: 0.7;"));
-                returnArrowImageView.setOnMouseExited(event ->
-                        returnArrowImageView.setStyle("-fx-opacity: 1.0;"));
+                returnArrowImageView.setOnMouseEntered(event -> returnArrowImageView.setStyle("-fx-opacity: 0.7;"));
+                returnArrowImageView.setOnMouseExited(event -> returnArrowImageView.setStyle("-fx-opacity: 1.0;"));
             }
         } catch (Exception e) {
             System.err.println("Error setting up return arrow: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
-    public void setDetailsImage(String imageUrl) {
-        try {
-            if (imageUrl != null && !imageUrl.isEmpty() && detailsImageView != null) {
-                Image image = new Image(imageUrl);
-                detailsImageView.setImage(image);
-                detailsImageView.setFitWidth(200);
-                detailsImageView.setFitHeight(300);
-                detailsImageView.setPreserveRatio(true);
-            }
-        } catch (Exception e) {
-            System.err.println("Error setting details image: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    public void setReturnArrowImage(String imageUrl) {
-        try {
-            if (imageUrl != null && !imageUrl.isEmpty() && returnArrowImageView != null) {
-                Image image = new Image(imageUrl);
-                returnArrowImageView.setImage(image);
-                returnArrowImageView.setFitWidth(30);
-                returnArrowImageView.setFitHeight(30);
-                returnArrowImageView.setPreserveRatio(true);
-            }
-        } catch (Exception e) {
-            System.err.println("Error setting return arrow image: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-
-    @FXML
-    private Button ReservationRequest;
-
-    public void backHome(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Client/HomePageClient.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setTitle("Library Reservation System");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void goForward(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == ReservationRequest) {
-            try {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Reservation/ReservationPage.fxml")));
-                Stage currentStage = (Stage) ReservationRequest.getScene().getWindow();
-                Scene scene = new Scene(root);
-                currentStage.setScene(scene);
-                currentStage.setTitle("Reservation Book");
-                currentStage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-
-
-
 }

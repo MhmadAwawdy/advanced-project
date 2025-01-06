@@ -1,9 +1,9 @@
 package librarysystem.models;
 
-public enum BookStatus {
+public enum BookStatus
+{
     AVAILABLE,
     UNAVAILABLE,
-    available,
-    reserved,
-    unavailable, RESERVED;
+    RESERVED
 }
+

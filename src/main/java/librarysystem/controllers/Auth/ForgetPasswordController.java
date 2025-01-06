@@ -11,6 +11,8 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import librarysystem.models.Librarian;
 import librarysystem.models.services.LibrarianDAOimp;
+import librarysystem.utils.StageUtil;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -143,6 +145,7 @@ public class ForgetPasswordController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Login");
+        StageUtil.setAppIcon(stage);
         stage.show();
     }
 }

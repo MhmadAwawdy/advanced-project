@@ -15,10 +15,8 @@
         </font>
     </Label>
 
-    <!-- Label for Due Date Picker -->
     <Label layoutX="213.0" layoutY="561.0" style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Select New Due Date:" />
 
-    <!-- Due Date Picker -->
     <DatePicker fx:id="dueDatePicker" layoutX="367.0" layoutY="548.0" prefHeight="46.0" prefWidth="384.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #DCA942; -fx-border-width: 3; -fx-background-radius: 50; -fx-border-radius: 50;" />
 
     <ListView fx:id="reservedBooksListView" layoutX="181.0" layoutY="122.0" prefHeight="379.0" prefWidth="716.0" style="-fx-background-color: #FBF3DB; -fx-border-color: #DCA942; -fx-border-width: 3;" />
