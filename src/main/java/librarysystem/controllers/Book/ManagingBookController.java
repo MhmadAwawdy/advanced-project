@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import librarysystem.models.Book;
-import librarysystem.models.Book.BookStatus;
 import librarysystem.models.services.BookDAOImp;
 import librarysystem.utils.StageUtil;
 
@@ -19,6 +18,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Objects;
+
+import static librarysystem.models.Book.BookStatus;
 
 public class ManagingBookController {
 
@@ -179,7 +180,7 @@ public class ManagingBookController {
                 newBook.setType(type);
                 newBook.setPublishDate(publishDate);
 
-                BookStatus bookStatus = BookStatus.AVAILABLE;
+                librarysystem.models.BookStatus bookStatus = BookStatus.AVAILABLE;
                 switch (statusStr) {
                     case "AVAILABLE":
                         bookStatus = BookStatus.AVAILABLE;
@@ -199,7 +200,7 @@ public class ManagingBookController {
                 newBook.setImage(bookImage);
 
                 try {
-                    bookDAOImp.save(newBook);
+                    bookDAOImp.booksave(newBook);
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Book added successfully!");
                     clearFields();
                 } catch (Exception e) {

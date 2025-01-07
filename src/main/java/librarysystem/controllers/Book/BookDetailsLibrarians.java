@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import librarysystem.controllers.HomePage.HomePageLibrariansController;
 import librarysystem.controllers.Reservation.SubmitReservationController;
 import librarysystem.models.Book;
+import librarysystem.models.BookStatus;
 import librarysystem.utils.HibernateUtil;
 import librarysystem.utils.StageUtil;
 import org.hibernate.Session;
@@ -81,30 +82,30 @@ public class BookDetailsLibrarians {
     private void loadBookDetails(int bookId)
     {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // Retrieve the book from the database
+
             Book book = session.get(Book.class, bookId);
 
             if (book != null) {
-                // Set the book details in the labels
+
                 bookNameLabel.setText("Book name: " + book.getTitle());
                 authorNameLabel.setText("Author name: " + book.getAuthor());
                 bookTypeLabel.setText("Book type: " + book.getType());
                 publicationDateLabel.setText("Publication date: " + book.getPublishDate());
                 bookingStatusLabel.setText(
-                        "Booking status: " + (book.getStatus() == Book.BookStatus.available ? "Available" : "Reserved")
+                        "Booking status: " + (book.getStatus() == BookStatus.available ? "Available" : "Reserved")
                 );
                 BookTitle = book.getTitle();
                 BookId = book.getId();
 
                 if (book.getImage() != null) {
-                    // Convert byte array to Image object
+
                     Image image = new Image(new ByteArrayInputStream(book.getImage()));
                     ImageView imageView = new ImageView(image);
-                    imageView.setFitWidth(200);  // Set the width
-                    imageView.setFitHeight(200); // Set the height
+                    imageView.setFitWidth(200);
+                    imageView.setFitHeight(200);
                     imageView.setPreserveRatio(true);
 
-                    // Assuming you have an ImageView in your FXML
+
                     bookImageView.setImage(image);
                 }
             } else {
@@ -145,17 +146,17 @@ public class BookDetailsLibrarians {
         try {
 
 
-            // First, load the FXML and get the root
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Reservation/SubmitReservation.fxml"));
-            Parent root = loader.load();  // This loads the FXML and returns the root
 
-            // Get the controller from the loader
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Reservation/SubmitReservation.fxml"));
+            Parent root = loader.load();
+
+
             SubmitReservationController controller = loader.getController();
 
-            // Set the book name in the controller
+
             controller.setBookName(BookTitle);
             controller.setBookId(BookId);
-            // Set up the stage and scene
+
             Stage currentStage = (Stage) BackToHome.getScene().getWindow();
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
@@ -203,7 +204,7 @@ public class BookDetailsLibrarians {
                 Book bookToDelete = session.get(Book.class, BookId);
 
                 if (bookToDelete != null) {
-                    if (bookToDelete.getStatus() == Book.BookStatus.reserved) {
+                    if (bookToDelete.getStatus() == BookStatus.reserved) {
                         Alert reservedAlert = new Alert(Alert.AlertType.WARNING);
                         reservedAlert.setTitle("Delete Error");
                         reservedAlert.setHeaderText("Cannot Delete Reserved Book");

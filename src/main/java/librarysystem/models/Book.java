@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "book")
 public class Book {
 
+    public static librarysystem.models.BookStatus BookStatus;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,11 +28,6 @@ public class Book {
     @Column(name = "status", nullable = false)
     private BookStatus status;
 
-    public enum BookStatus
-    {
-        available, AVAILABLE, UNAVAILABLE, RESERVED, reserved
-    }
-
     @Override
     public String toString() {
         return "Book ID: " + id + ", Title: " + title + ", Author: " + author;
@@ -46,7 +42,7 @@ public class Book {
     {
         if (status == null)
         {
-            status = BookStatus.available;
+            status = librarysystem.models.BookStatus.available;
         }
     }
 

@@ -50,6 +50,29 @@ public class BookDAOImp implements BookDAO
             transaction = session.beginTransaction();
             System.out.println("Status: " + book.getStatus());
 
+            session.update(book);
+            transaction.commit();
+        }
+        catch (Exception e)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Failed to save the book", e);
+        }
+    }
+    @Override
+    public void booksave(Book book)
+    {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession())
+        {
+            transaction = session.beginTransaction();
+            System.out.println("Status: " + book.getStatus());
+
             session.save(book);
             session.update(book);
             transaction.commit();
@@ -65,6 +88,7 @@ public class BookDAOImp implements BookDAO
             throw new RuntimeException("Failed to save the book", e);
         }
     }
+
     public boolean isBookExists(String title, String author)
     {
         try (Session session = sessionFactory.openSession())
