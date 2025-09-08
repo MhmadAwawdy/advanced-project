@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="745.0" prefWidth="1000.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.librarysystem.app.UpdateController">
+   <children>
+      <Label fx:id="page_tittle" layoutX="100.0" layoutY="78.0" text="Update Book Information:">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="book_tittle" layoutX="127.0" layoutY="160.0" prefHeight="28.0" prefWidth="300.0" promptText="Book-title" style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;" />
+      <TextField fx:id="author_name" layoutX="551.0" layoutY="160.0" prefHeight="28.0" prefWidth="300.0" promptText="Author-name" style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;" />
+      <TextField fx:id="book_type" layoutX="127.0" layoutY="230.0" prefHeight="28.0" prefWidth="300.0" promptText="Book-type" style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;" />
+      <TextField fx:id="puplication_date" layoutX="551.0" layoutY="230.0" prefHeight="28.0" prefWidth="300.0" promptText="Publication-date" style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;" />
+      <TextField fx:id="book_status" layoutX="328.0" layoutY="299.0" prefHeight="28.0" prefWidth="300.0" promptText="Booking-status" style="-fx-border-color: #DCA942; -fx-border-radius: 20; -fx-background-radius: 20;" />
+      <Button fx:id="update_btn" layoutX="471.0" layoutY="392.0" mnemonicParsing="false" style="-fx-background-color: #DCA942;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="page_icon" fitHeight="41.0" fitWidth="57.0" layoutX="49.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/6cd5a0e7a3c04af99f95b9f3f5443a5f.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
